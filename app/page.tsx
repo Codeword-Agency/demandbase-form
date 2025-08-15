@@ -8,12 +8,10 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { useToast } from "@/hooks/use-toast"
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -42,10 +40,6 @@ export default function ContactForm() {
       console.log("[v0] Response data:", responseData)
 
       if (response.ok) {
-        toast({
-          title: "Success!",
-          description: "Your message has been submitted successfully.",
-        })
         setIsSuccess(true)
         e.currentTarget.reset()
 
@@ -53,19 +47,10 @@ export default function ContactForm() {
           setIsSuccess(false)
         }, 3000)
       } else {
-        toast({
-          title: "Error",
-          description: responseData.error || "Failed to submit your message. Please try again.",
-          variant: "destructive",
-        })
+        console.error("[v0] Server error:", responseData.error || "Failed to submit message")
       }
     } catch (error) {
       console.error("[v0] Client error:", error)
-      toast({
-        title: "Error",
-        description: "Failed to submit your message. Please try again.",
-        variant: "destructive",
-      })
     } finally {
       setIsSubmitting(false)
     }
