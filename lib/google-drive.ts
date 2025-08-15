@@ -24,6 +24,8 @@ export async function uploadToGoogleDrive(
       throw new Error("Missing required Google Drive environment variables")
     }
 
+    console.log("[v0] Testing service account authentication...")
+
     // Initialize Google Drive API with service account
     const auth = new google.auth.GoogleAuth({
       credentials: {
@@ -41,8 +43,25 @@ export async function uploadToGoogleDrive(
       scopes: ["https://www.googleapis.com/auth/drive.file"],
     })
 
+    try {
+      const authClient = await auth.getClient()
+      console.log("[v0] Authentication successful")
+    } catch (authError) {
+      console.error("[v0] Authentication failed:", authError)
+      throw new Error(`Service account authentication failed: ${authError}`)
+    }
+
     console.log("[v0] Google Auth initialized, creating Drive client...")
     const drive = google.drive({ version: "v3", auth })
+
+    try {
+      console.log("[v0] Testing Drive API access...")
+      await drive.about.get({ fields: "user" })
+      console.log("[v0] Drive API access confirmed")
+    } catch (driveError) {
+      console.error("[v0] Drive API access failed:", driveError)
+      throw new Error(`Drive API access denied. Make sure the service account has Drive API enabled: ${driveError}`)
+    }
 
     // Create file metadata
     const fileMetadata = {
@@ -94,10 +113,20 @@ export async function uploadToGoogleDrive(
     }
   } catch (error) {
     console.error("[v0] Google Drive upload error:", error)
+
     if (error instanceof Error) {
       console.error("[v0] Error message:", error.message)
       console.error("[v0] Error stack:", error.stack)
+
+      // Provide specific guidance based on error type
+      if (error.message.includes("Service account")) {
+        console.error("[v0] SOLUTION: Check your service account setup:")
+        console.error("1. Ensure Google Drive API is enabled in Google Cloud Console")
+        console.error("2. Verify service account has proper permissions")
+        console.error("3. Check that all environment variables are correctly set")
+      }
     }
+
     throw new Error(`Failed to upload to Google Drive: ${error}`)
   }
 }
