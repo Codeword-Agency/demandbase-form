@@ -2,6 +2,7 @@
 
 import type React from "react"
 import VoiceRecorder from "@/components/voice-recorder"
+import GoogleAuth from "@/components/google-auth"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,6 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function ContactForm() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [voiceRecording, setVoiceRecording] = useState<Blob | null>(null)
@@ -18,6 +20,10 @@ export default function ContactForm() {
     company: "",
     message: "",
   })
+
+  const handleAuthSuccess = () => {
+    setIsAuthenticated(true)
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -125,6 +131,10 @@ export default function ContactForm() {
 
   const handleRecordingDelete = () => {
     setVoiceRecording(null)
+  }
+
+  if (!isAuthenticated) {
+    return <GoogleAuth onAuthSuccess={handleAuthSuccess} />
   }
 
   return (

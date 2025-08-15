@@ -12,41 +12,49 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Message is required" }, { status: 400 })
     }
 
+    const tokensCookie = request.cookies.get("google_tokens")
+    if (!tokensCookie) {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 })
+    }
+
+    let tokens
+    try {
+      tokens = JSON.parse(tokensCookie.value)
+    } catch (parseError) {
+      return NextResponse.json({ error: "Invalid authentication tokens" }, { status: 401 })
+    }
+
     // Google Sheets configuration
     const SHEET_ID = process.env.GOOGLE_SHEET_ID
-    const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
-    const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY
 
     console.log("[v0] Environment variables check:", {
       hasSheetId: !!SHEET_ID,
-      hasEmail: !!GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      hasPrivateKey: !!GOOGLE_PRIVATE_KEY,
+      hasTokens: !!tokens.access_token,
       sheetId: SHEET_ID,
-      email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
     })
 
-    if (!SHEET_ID || !GOOGLE_SERVICE_ACCOUNT_EMAIL || !GOOGLE_PRIVATE_KEY) {
+    if (!SHEET_ID) {
       console.error("[v0] Missing Google Sheets configuration")
       return NextResponse.json(
         {
-          error: "Server configuration error - missing environment variables",
+          error: "Server configuration error - missing GOOGLE_SHEET_ID",
         },
         { status: 500 },
       )
     }
 
     try {
-      console.log("[v0] Creating Google Auth...")
-      const auth = new google.auth.GoogleAuth({
-        credentials: {
-          client_email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
-          private_key: GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-        },
-        scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-      })
+      console.log("[v0] Creating OAuth client...")
+      const oauth2Client = new google.auth.OAuth2(
+        process.env.GOOGLE_CLIENT_ID,
+        process.env.GOOGLE_CLIENT_SECRET,
+        process.env.GOOGLE_REDIRECT_URI,
+      )
+
+      oauth2Client.setCredentials(tokens)
 
       console.log("[v0] Creating sheets client...")
-      const sheets = google.sheets({ version: "v4", auth })
+      const sheets = google.sheets({ version: "v4", auth: oauth2Client })
 
       const timestamp = new Date().toISOString()
       const voiceLink = voiceFileId ? `https://drive.google.com/file/d/${voiceFileId}/view` : ""
@@ -74,7 +82,7 @@ export async function POST(request: NextRequest) {
         if (authError.message.includes("403")) {
           return NextResponse.json(
             {
-              error: "Permission denied - check if service account has access to the sheet",
+              error: "Permission denied - make sure you've shared the sheet with your Google account",
             },
             { status: 500 },
           )
@@ -88,9 +96,9 @@ export async function POST(request: NextRequest) {
         } else if (authError.message.includes("401")) {
           return NextResponse.json(
             {
-              error: "Authentication failed - check your service account credentials",
+              error: "Authentication expired - please sign in again",
             },
-            { status: 500 },
+            { status: 401 },
           )
         }
       }

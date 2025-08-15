@@ -6,18 +6,20 @@ export async function POST(request: NextRequest) {
   try {
     console.log("[v0] Audio upload request received")
 
-    const requiredEnvVars = ["GOOGLE_SERVICE_ACCOUNT_EMAIL", "GOOGLE_PRIVATE_KEY", "GOOGLE_PROJECT_ID"]
+    const tokensCookie = request.cookies.get("google_tokens")
+    if (!tokensCookie) {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 })
+    }
 
-    const missingVars = requiredEnvVars.filter((varName) => !process.env[varName])
-    if (missingVars.length > 0) {
-      console.error("[v0] Missing environment variables:", missingVars)
-      return NextResponse.json(
-        {
-          error: "Server configuration error",
-          details: `Missing environment variables: ${missingVars.join(", ")}`,
-        },
-        { status: 500 },
-      )
+    let tokens
+    try {
+      tokens = JSON.parse(tokensCookie.value)
+    } catch (parseError) {
+      return NextResponse.json({ error: "Invalid authentication tokens" }, { status: 401 })
+    }
+
+    if (!tokens.access_token) {
+      return NextResponse.json({ error: "No access token available" }, { status: 401 })
     }
 
     const formData = await request.formData()
@@ -58,11 +60,15 @@ export async function POST(request: NextRequest) {
 
     console.log("[v0] Attempting Google Drive upload...")
 
-    // Upload to Google Drive
-    const result = await uploadToGoogleDrive(buffer, fileName, {
-      name: name || "Anonymous",
-      company: company || "N/A",
-    })
+    const result = await uploadToGoogleDrive(
+      buffer,
+      fileName,
+      {
+        name: name || "Anonymous",
+        company: company || "N/A",
+      },
+      tokens.access_token,
+    )
 
     console.log("[v0] Audio upload successful:", result)
 
@@ -84,10 +90,10 @@ export async function POST(request: NextRequest) {
       // Provide more specific error messages based on common issues
       if (error.message.includes("403")) {
         errorMessage = "Permission denied - check Google Drive access"
-        errorDetails = "Service account may not have access to Google Drive or the specified folder"
+        errorDetails = "Your Google account may not have access to Google Drive"
       } else if (error.message.includes("401")) {
-        errorMessage = "Authentication failed"
-        errorDetails = "Invalid Google service account credentials"
+        errorMessage = "Authentication expired"
+        errorDetails = "Please sign in with Google again"
       } else if (error.message.includes("404")) {
         errorMessage = "Google Drive folder not found"
         errorDetails = "Check GOOGLE_DRIVE_FOLDER_ID environment variable"

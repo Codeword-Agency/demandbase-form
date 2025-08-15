@@ -1,6 +1,6 @@
 # Contact Form with Google Sheets & Voice Memo Integration
 
-A Next.js contact form that saves submissions to Google Sheets and uploads voice memos to Google Drive using native HTML5 audio recording.
+A Next.js contact form that saves submissions to Google Sheets and uploads voice memos to Google Drive using native HTML5 audio recording with OAuth authentication.
 
 ## Features
 
@@ -8,6 +8,7 @@ A Next.js contact form that saves submissions to Google Sheets and uploads voice
 - **Voice Recording**: Native HTML5 audio recording with compression
 - **Google Sheets Integration**: Form submissions saved automatically
 - **Google Drive Storage**: Voice memos uploaded and linked in spreadsheet
+- **OAuth Authentication**: Secure user authentication with Google
 - **Real-time Feedback**: Visual recording indicators and success states
 
 ## Setup Instructions
@@ -19,44 +20,51 @@ A Next.js contact form that saves submissions to Google Sheets and uploads voice
    - Google Sheets API
    - Google Drive API
 
-### 2. Create Service Account
-1. Go to "Credentials" → "Create Credentials" → "Service Account"
-2. Create a service account with any name
-3. Click on the created service account
-4. Go to "Keys" tab → "Add Key" → "Create New Key" → "JSON"
-5. Download the JSON file and extract these values:
-   - `client_email`
-   - `private_key`
-   - `project_id`
-   - `private_key_id`
+### 2. Create OAuth 2.0 Credentials
+1. Go to "Credentials" → "Create Credentials" → "OAuth 2.0 Client ID"
+2. Configure OAuth consent screen first if prompted:
+   - Choose "External" user type
+   - Fill in required app information
+   - Add your domain to authorized domains
+   - Add scopes: `../auth/spreadsheets` and `../auth/drive.file`
+3. Create OAuth 2.0 Client ID:
+   - Application type: "Web application"
+   - Authorized JavaScript origins: `http://localhost:3000` (for development)
+   - Authorized redirect URIs: `http://localhost:3000/api/auth/callback`
+4. Download the JSON file and extract:
    - `client_id`
+   - `client_secret`
 
 ### 3. Create Google Sheet
 1. Go to [Google Sheets](https://sheets.google.com)
 2. Create a new spreadsheet
 3. Add headers in the first row: `Timestamp`, `Name`, `Company`, `Message`, `Has Voice Memo`, `Voice Memo Link`
 4. Copy the Sheet ID from the URL (the long string between `/d/` and `/edit`)
-5. Share the sheet with your service account email as an editor
+5. **Important**: Make sure the sheet is accessible to your Google account (the one you'll authenticate with)
 
 ### 4. Create Google Drive Folder (Optional)
 1. Create a folder in Google Drive for voice memos
-2. Share the folder with your service account email as an editor
-3. Copy the folder ID from the URL
+2. Copy the folder ID from the URL
+3. **Note**: With OAuth, files will be uploaded to the authenticated user's Drive
 
 ### 5. Configure Environment Variables
 Add these to your Vercel project settings or `.env.local`:
 
 \`\`\`env
+# OAuth Configuration
+GOOGLE_CLIENT_ID=your-oauth-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-oauth-client-secret
+GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/callback
+
+# Google Services
 GOOGLE_SHEET_ID=your_google_sheet_id_here
-GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@your-project.iam.gserviceaccount.com
-GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour private key here\n-----END PRIVATE KEY-----\n"
-GOOGLE_PROJECT_ID=your-project-id
-GOOGLE_PRIVATE_KEY_ID=your-private-key-id
-GOOGLE_CLIENT_ID=your-client-id
 GOOGLE_DRIVE_FOLDER_ID=your-drive-folder-id (optional)
+
+# App Configuration
+NEXTAUTH_URL=http://localhost:3000
 \`\`\`
 
-**Important**: The private key should include the full key with `\n` characters for line breaks.
+**For Production**: Update `GOOGLE_REDIRECT_URI` and `NEXTAUTH_URL` to your production domain.
 
 ### 6. Install Dependencies and Run
 \`\`\`bash
@@ -66,11 +74,20 @@ npm run dev
 
 ## How It Works
 
-1. **Form Submission**: User fills out contact form with optional voice memo
-2. **Voice Recording**: Uses MediaRecorder API with WebM/Opus compression
-3. **File Upload**: Voice memos uploaded to Google Drive via service account
-4. **Sheet Update**: Form data and voice memo links saved to Google Sheets
-5. **User Feedback**: Success indicators and form reset on completion
+1. **Authentication**: User signs in with Google OAuth to grant access to Sheets and Drive
+2. **Form Submission**: User fills out contact form with optional voice memo
+3. **Voice Recording**: Uses MediaRecorder API with WebM/Opus compression
+4. **File Upload**: Voice memos uploaded to user's Google Drive via OAuth
+5. **Sheet Update**: Form data and voice memo links saved to Google Sheets
+6. **User Feedback**: Success indicators and form reset on completion
+
+## OAuth vs Service Account
+
+This app now uses **OAuth authentication** instead of service accounts, which provides:
+- ✅ Access to user's personal Google Drive (no storage quota issues)
+- ✅ More secure user-based permissions
+- ✅ No need to share sheets with service accounts
+- ✅ Better user experience with familiar Google sign-in
 
 ## Browser Compatibility
 
@@ -80,7 +97,8 @@ npm run dev
 
 ## Security Features
 
-- Service account authentication (more secure than API keys)
-- Scoped permissions (only access to shared sheets/folders)
+- OAuth 2.0 authentication (industry standard)
+- Scoped permissions (only access to user's sheets and drive files)
 - No external dependencies for audio recording
 - Compressed audio files to minimize storage usage
+- Secure token handling with HTTP-only cookies

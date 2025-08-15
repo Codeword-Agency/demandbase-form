@@ -5,72 +5,25 @@ export async function uploadToGoogleDrive(
   audioBuffer: Buffer,
   fileName: string,
   metadata: { name: string; company: string },
+  accessToken: string,
 ) {
   try {
-    console.log("[v0] Starting Google Drive upload process...")
+    console.log("[v0] Starting Google Drive upload process with OAuth...")
 
-    const requiredVars = {
-      GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
-      GOOGLE_PRIVATE_KEY: process.env.GOOGLE_PRIVATE_KEY,
-      GOOGLE_SERVICE_ACCOUNT_EMAIL: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      GOOGLE_PRIVATE_KEY_ID: process.env.GOOGLE_PRIVATE_KEY_ID,
-      GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-    }
+    const oauth2Client = new google.auth.OAuth2(
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET,
+      process.env.GOOGLE_REDIRECT_URI,
+    )
 
-    const missingVars = Object.entries(requiredVars)
-      .filter(([key, value]) => !value)
-      .map(([key]) => key)
-
-    if (missingVars.length > 0) {
-      const errorMessage = `Missing required Google Drive service account environment variables: ${missingVars.join(", ")}. 
-
-To fix this:
-1. Go to Google Cloud Console (console.cloud.google.com)
-2. Create a service account with Drive API access
-3. Download the JSON credentials file
-4. Add these environment variables to your project settings:
-   - GOOGLE_SERVICE_ACCOUNT_EMAIL (from "client_email" in JSON)
-   - GOOGLE_PRIVATE_KEY (from "private_key" in JSON)
-   - GOOGLE_PRIVATE_KEY_ID (from "private_key_id" in JSON)
-   - GOOGLE_CLIENT_ID (from "client_id" in JSON)
-   - GOOGLE_PROJECT_ID (from "project_id" in JSON)`
-
-      console.error("[v0] Environment variable validation failed:")
-      console.error(errorMessage)
-      throw new Error(errorMessage)
-    }
-
-    console.log("[v0] All required environment variables present")
-
-    console.log("[v0] Testing service account authentication...")
-
-    // Initialize Google Drive API with service account
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        type: "service_account",
-        project_id: process.env.GOOGLE_PROJECT_ID,
-        private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        auth_uri: "https://accounts.google.com/o/oauth2/auth",
-        token_uri: "https://oauth2.googleapis.com/token",
-        auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-        client_x509_cert_url: `https://www.googleapis.com/robot/v1/metadata/x509/${process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL}`,
-      },
-      scopes: ["https://www.googleapis.com/auth/drive.file"],
+    // Set the access token
+    oauth2Client.setCredentials({
+      access_token: accessToken,
     })
 
-    try {
-      const authClient = await auth.getClient()
-      console.log("[v0] Authentication successful")
-    } catch (authError) {
-      console.error("[v0] Authentication failed:", authError)
-      throw new Error(`Service account authentication failed: ${authError}`)
-    }
+    console.log("[v0] OAuth client initialized with access token")
 
-    console.log("[v0] Google Auth initialized, creating Drive client...")
-    const drive = google.drive({ version: "v3", auth })
+    const drive = google.drive({ version: "v3", auth: oauth2Client })
 
     try {
       console.log("[v0] Testing Drive API access...")
@@ -78,7 +31,7 @@ To fix this:
       console.log("[v0] Drive API access confirmed")
     } catch (driveError) {
       console.error("[v0] Drive API access failed:", driveError)
-      throw new Error(`Drive API access denied. Make sure the service account has Drive API enabled: ${driveError}`)
+      throw new Error(`Drive API access denied: ${driveError}`)
     }
 
     // Create file metadata
@@ -137,7 +90,6 @@ To fix this:
       console.error("- Message:", error.message)
       console.error("- Stack:", error.stack)
 
-      // Show the complete error message instead of truncating it
       throw new Error(`Google Drive upload failed: ${error.message}`)
     }
 
