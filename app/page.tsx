@@ -26,6 +26,7 @@ export default function ContactForm() {
     }
 
     try {
+      console.log("[v0] Submitting form data:", data)
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: {
@@ -33,6 +34,10 @@ export default function ContactForm() {
         },
         body: JSON.stringify(data),
       })
+
+      console.log("[v0] Response status:", response.status)
+      const responseData = await response.json()
+      console.log("[v0] Response data:", responseData)
 
       if (response.ok) {
         toast({
@@ -42,9 +47,14 @@ export default function ContactForm() {
         // Reset form
         e.currentTarget.reset()
       } else {
-        throw new Error("Failed to submit")
+        toast({
+          title: "Error",
+          description: responseData.error || "Failed to submit your message. Please try again.",
+          variant: "destructive",
+        })
       }
     } catch (error) {
+      console.error("[v0] Client error:", error)
       toast({
         title: "Error",
         description: "Failed to submit your message. Please try again.",
