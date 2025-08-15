@@ -8,21 +8,39 @@ export async function uploadToGoogleDrive(
 ) {
   try {
     console.log("[v0] Starting Google Drive upload process...")
-    console.log("[v0] Environment variables check:")
-    console.log("[v0] - GOOGLE_PROJECT_ID:", !!process.env.GOOGLE_PROJECT_ID)
-    console.log("[v0] - GOOGLE_PRIVATE_KEY_ID:", !!process.env.GOOGLE_PRIVATE_KEY_ID)
-    console.log("[v0] - GOOGLE_PRIVATE_KEY:", !!process.env.GOOGLE_PRIVATE_KEY)
-    console.log("[v0] - GOOGLE_SERVICE_ACCOUNT_EMAIL:", !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL)
-    console.log("[v0] - GOOGLE_CLIENT_ID:", !!process.env.GOOGLE_CLIENT_ID)
-    console.log("[v0] - GOOGLE_DRIVE_FOLDER_ID:", !!process.env.GOOGLE_DRIVE_FOLDER_ID)
 
-    if (
-      !process.env.GOOGLE_PROJECT_ID ||
-      !process.env.GOOGLE_PRIVATE_KEY ||
-      !process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
-    ) {
-      throw new Error("Missing required Google Drive environment variables")
+    const requiredVars = {
+      GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
+      GOOGLE_PRIVATE_KEY: process.env.GOOGLE_PRIVATE_KEY,
+      GOOGLE_SERVICE_ACCOUNT_EMAIL: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      GOOGLE_PRIVATE_KEY_ID: process.env.GOOGLE_PRIVATE_KEY_ID,
+      GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     }
+
+    const missingVars = Object.entries(requiredVars)
+      .filter(([key, value]) => !value)
+      .map(([key]) => key)
+
+    if (missingVars.length > 0) {
+      const errorMessage = `Missing required Google Drive service account environment variables: ${missingVars.join(", ")}. 
+
+To fix this:
+1. Go to Google Cloud Console (console.cloud.google.com)
+2. Create a service account with Drive API access
+3. Download the JSON credentials file
+4. Add these environment variables to your project settings:
+   - GOOGLE_SERVICE_ACCOUNT_EMAIL (from "client_email" in JSON)
+   - GOOGLE_PRIVATE_KEY (from "private_key" in JSON)
+   - GOOGLE_PRIVATE_KEY_ID (from "private_key_id" in JSON)
+   - GOOGLE_CLIENT_ID (from "client_id" in JSON)
+   - GOOGLE_PROJECT_ID (from "project_id" in JSON)`
+
+      console.error("[v0] Environment variable validation failed:")
+      console.error(errorMessage)
+      throw new Error(errorMessage)
+    }
+
+    console.log("[v0] All required environment variables present")
 
     console.log("[v0] Testing service account authentication...")
 
@@ -115,18 +133,14 @@ export async function uploadToGoogleDrive(
     console.error("[v0] Google Drive upload error:", error)
 
     if (error instanceof Error) {
-      console.error("[v0] Error message:", error.message)
-      console.error("[v0] Error stack:", error.stack)
+      console.error("[v0] Full error details:")
+      console.error("- Message:", error.message)
+      console.error("- Stack:", error.stack)
 
-      // Provide specific guidance based on error type
-      if (error.message.includes("Service account")) {
-        console.error("[v0] SOLUTION: Check your service account setup:")
-        console.error("1. Ensure Google Drive API is enabled in Google Cloud Console")
-        console.error("2. Verify service account has proper permissions")
-        console.error("3. Check that all environment variables are correctly set")
-      }
+      // Show the complete error message instead of truncating it
+      throw new Error(`Google Drive upload failed: ${error.message}`)
     }
 
-    throw new Error(`Failed to upload to Google Drive: ${error}`)
+    throw new Error(`Failed to upload to Google Drive: ${String(error)}`)
   }
 }
