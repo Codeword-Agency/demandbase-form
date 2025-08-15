@@ -12,6 +12,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [formValues, setFormValues] = useState({
+    name: "",
+    company: "",
+    message: "",
+  })
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -41,7 +46,7 @@ export default function ContactForm() {
 
       if (response.ok) {
         setIsSuccess(true)
-        e.currentTarget.reset()
+        setFormValues({ name: "", company: "", message: "" })
 
         setTimeout(() => {
           setIsSuccess(false)
@@ -56,6 +61,11 @@ export default function ContactForm() {
     }
   }
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormValues((prev) => ({ ...prev, [name]: value }))
+  }
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
@@ -67,17 +77,39 @@ export default function ContactForm() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name">Name (Optional)</Label>
-              <Input id="name" name="name" type="text" placeholder="Your name" />
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                value={formValues.name}
+                onChange={handleInputChange}
+              />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="company">Company (Optional)</Label>
-              <Input id="company" name="company" type="text" placeholder="Your company" />
+              <Input
+                id="company"
+                name="company"
+                type="text"
+                placeholder="Your company"
+                value={formValues.company}
+                onChange={handleInputChange}
+              />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="message">Message *</Label>
-              <Textarea id="message" name="message" placeholder="Your message..." required rows={4} />
+              <Textarea
+                id="message"
+                name="message"
+                placeholder="Your message..."
+                required
+                rows={4}
+                value={formValues.message}
+                onChange={handleInputChange}
+              />
             </div>
 
             <Button
