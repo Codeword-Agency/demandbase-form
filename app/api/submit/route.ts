@@ -4,8 +4,8 @@ import { google } from "googleapis"
 export async function POST(request: NextRequest) {
   try {
     console.log("[v0] API route called")
-    const { name, company, message } = await request.json()
-    console.log("[v0] Request data:", { name, company, message })
+    const { name, company, message, voiceFileId, hasVoiceRecording } = await request.json()
+    console.log("[v0] Request data:", { name, company, message, voiceFileId, hasVoiceRecording })
 
     // Validate required fields
     if (!message || message.trim() === "") {
@@ -48,15 +48,15 @@ export async function POST(request: NextRequest) {
       console.log("[v0] Creating sheets client...")
       const sheets = google.sheets({ version: "v4", auth })
 
-      // Prepare data for Google Sheets
       const timestamp = new Date().toISOString()
-      const rowData = [timestamp, name || "", company || "", message]
+      const voiceLink = voiceFileId ? `https://drive.google.com/file/d/${voiceFileId}/view` : ""
+      const rowData = [timestamp, name || "", company || "", message, hasVoiceRecording ? "Yes" : "No", voiceLink]
       console.log("[v0] Row data to append:", rowData)
 
       console.log("[v0] Attempting to append to sheet...")
       const result = await sheets.spreadsheets.values.append({
         spreadsheetId: SHEET_ID,
-        range: "Sheet1!A:D",
+        range: "Sheet1!A:F",
         valueInputOption: "RAW",
         requestBody: {
           values: [rowData],

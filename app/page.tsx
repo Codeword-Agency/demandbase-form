@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import VoiceRecorder from "@/components/voice-recorder"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [voiceRecording, setVoiceRecording] = useState<Blob | null>(null)
   const [formValues, setFormValues] = useState({
     name: "",
     company: "",
@@ -28,16 +29,39 @@ export default function ContactForm() {
       name: formData.get("name") as string,
       company: formData.get("company") as string,
       message: formData.get("message") as string,
+      hasVoiceRecording: voiceRecording !== null,
     }
 
     try {
       console.log("[v0] Submitting form data:", data)
+
+      let voiceFileId = null
+      if (voiceRecording) {
+        const audioFormData = new FormData()
+        audioFormData.append("audio", voiceRecording, `voice-memo-${Date.now()}.webm`)
+        audioFormData.append("name", data.name || "Anonymous")
+        audioFormData.append("company", data.company || "N/A")
+
+        const audioResponse = await fetch("/api/upload-audio", {
+          method: "POST",
+          body: audioFormData,
+        })
+
+        if (audioResponse.ok) {
+          const audioResult = await audioResponse.json()
+          voiceFileId = audioResult.fileId
+        }
+      }
+
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          voiceFileId,
+        }),
       })
 
       console.log("[v0] Response status:", response.status)
@@ -47,6 +71,7 @@ export default function ContactForm() {
       if (response.ok) {
         setIsSuccess(true)
         setFormValues({ name: "", company: "", message: "" })
+        setVoiceRecording(null)
 
         setTimeout(() => {
           setIsSuccess(false)
@@ -64,6 +89,14 @@ export default function ContactForm() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormValues((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleRecordingComplete = (audioBlob: Blob) => {
+    setVoiceRecording(audioBlob)
+  }
+
+  const handleRecordingDelete = () => {
+    setVoiceRecording(null)
   }
 
   return (
@@ -110,6 +143,11 @@ export default function ContactForm() {
                 value={formValues.message}
                 onChange={handleInputChange}
               />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Voice Memo (Optional)</Label>
+              <VoiceRecorder onRecordingComplete={handleRecordingComplete} onRecordingDelete={handleRecordingDelete} />
             </div>
 
             <Button
