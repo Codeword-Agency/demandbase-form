@@ -6,6 +6,23 @@ export async function uploadToGoogleDrive(
   metadata: { name: string; company: string },
 ) {
   try {
+    console.log("[v0] Starting Google Drive upload process...")
+    console.log("[v0] Environment variables check:")
+    console.log("[v0] - GOOGLE_PROJECT_ID:", !!process.env.GOOGLE_PROJECT_ID)
+    console.log("[v0] - GOOGLE_PRIVATE_KEY_ID:", !!process.env.GOOGLE_PRIVATE_KEY_ID)
+    console.log("[v0] - GOOGLE_PRIVATE_KEY:", !!process.env.GOOGLE_PRIVATE_KEY)
+    console.log("[v0] - GOOGLE_SERVICE_ACCOUNT_EMAIL:", !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL)
+    console.log("[v0] - GOOGLE_CLIENT_ID:", !!process.env.GOOGLE_CLIENT_ID)
+    console.log("[v0] - GOOGLE_DRIVE_FOLDER_ID:", !!process.env.GOOGLE_DRIVE_FOLDER_ID)
+
+    if (
+      !process.env.GOOGLE_PROJECT_ID ||
+      !process.env.GOOGLE_PRIVATE_KEY ||
+      !process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
+    ) {
+      throw new Error("Missing required Google Drive environment variables")
+    }
+
     // Initialize Google Drive API with service account
     const auth = new google.auth.GoogleAuth({
       credentials: {
@@ -23,6 +40,7 @@ export async function uploadToGoogleDrive(
       scopes: ["https://www.googleapis.com/auth/drive.file"],
     })
 
+    console.log("[v0] Google Auth initialized, creating Drive client...")
     const drive = google.drive({ version: "v3", auth })
 
     // Create file metadata
@@ -39,12 +57,31 @@ export async function uploadToGoogleDrive(
     }
 
     console.log("[v0] Uploading to Google Drive:", fileName)
+    console.log("[v0] File metadata:", fileMetadata)
+    console.log("[v0] Audio buffer size:", audioBuffer.length)
+
     const response = await drive.files.create({
       requestBody: fileMetadata,
       media: media,
     })
 
     console.log("[v0] Google Drive upload successful:", response.data.id)
+
+    if (response.data.id) {
+      try {
+        await drive.permissions.create({
+          fileId: response.data.id,
+          requestBody: {
+            role: "reader",
+            type: "anyone",
+          },
+        })
+        console.log("[v0] File permissions set to public")
+      } catch (permError) {
+        console.warn("[v0] Could not set file permissions:", permError)
+      }
+    }
+
     return {
       fileId: response.data.id,
       fileName: fileName,
@@ -52,6 +89,10 @@ export async function uploadToGoogleDrive(
     }
   } catch (error) {
     console.error("[v0] Google Drive upload error:", error)
+    if (error instanceof Error) {
+      console.error("[v0] Error message:", error.message)
+      console.error("[v0] Error stack:", error.stack)
+    }
     throw new Error(`Failed to upload to Google Drive: ${error}`)
   }
 }

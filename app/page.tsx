@@ -34,24 +34,49 @@ export default function ContactForm() {
 
     try {
       console.log("[v0] Submitting form data:", data)
+      console.log("[v0] Voice recording exists:", !!voiceRecording)
+      console.log("[v0] Voice recording size:", voiceRecording?.size || 0)
 
       let voiceFileId = null
+      let voiceFileUrl = null
+
       if (voiceRecording) {
+        console.log("[v0] Starting audio upload process...")
+
         const audioFormData = new FormData()
         audioFormData.append("audio", voiceRecording, `voice-memo-${Date.now()}.webm`)
         audioFormData.append("name", data.name || "Anonymous")
         audioFormData.append("company", data.company || "N/A")
 
-        const audioResponse = await fetch("/api/upload-audio", {
-          method: "POST",
-          body: audioFormData,
-        })
+        console.log("[v0] Audio FormData prepared, making upload request...")
 
-        if (audioResponse.ok) {
-          const audioResult = await audioResponse.json()
-          voiceFileId = audioResult.fileId
+        try {
+          const audioResponse = await fetch("/api/upload-audio", {
+            method: "POST",
+            body: audioFormData,
+          })
+
+          console.log("[v0] Audio upload response status:", audioResponse.status)
+
+          if (audioResponse.ok) {
+            const audioResult = await audioResponse.json()
+            console.log("[v0] Audio upload successful:", audioResult)
+            voiceFileId = audioResult.fileId
+            voiceFileUrl = audioResult.webViewLink
+          } else {
+            const errorData = await audioResponse.json()
+            console.error("[v0] Audio upload failed:", errorData)
+            alert(`Audio upload failed: ${errorData.error || "Unknown error"}`)
+          }
+        } catch (audioError) {
+          console.error("[v0] Audio upload request failed:", audioError)
+          alert(`Audio upload request failed: ${audioError}`)
         }
       }
+
+      console.log("[v0] Proceeding with form submission...")
+      console.log("[v0] Voice file ID:", voiceFileId)
+      console.log("[v0] Voice file URL:", voiceFileUrl)
 
       const response = await fetch("/api/submit", {
         method: "POST",
@@ -61,12 +86,13 @@ export default function ContactForm() {
         body: JSON.stringify({
           ...data,
           voiceFileId,
+          voiceFileUrl,
         }),
       })
 
-      console.log("[v0] Response status:", response.status)
+      console.log("[v0] Form submission response status:", response.status)
       const responseData = await response.json()
-      console.log("[v0] Response data:", responseData)
+      console.log("[v0] Form submission response data:", responseData)
 
       if (response.ok) {
         setIsSuccess(true)
@@ -77,10 +103,12 @@ export default function ContactForm() {
           setIsSuccess(false)
         }, 3000)
       } else {
-        console.error("[v0] Server error:", responseData.error || "Failed to submit message")
+        console.error("[v0] Form submission server error:", responseData.error || "Failed to submit message")
+        alert(`Form submission failed: ${responseData.error || "Unknown error"}`)
       }
     } catch (error) {
       console.error("[v0] Client error:", error)
+      alert(`Submission failed: ${error}`)
     } finally {
       setIsSubmitting(false)
     }
