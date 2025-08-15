@@ -12,11 +12,13 @@ import { useToast } from "@/hooks/use-toast"
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setIsSuccess(false)
 
     const formData = new FormData(e.currentTarget)
     const data = {
@@ -44,8 +46,12 @@ export default function ContactForm() {
           title: "Success!",
           description: "Your message has been submitted successfully.",
         })
-        // Reset form
+        setIsSuccess(true)
         e.currentTarget.reset()
+
+        setTimeout(() => {
+          setIsSuccess(false)
+        }, 3000)
       } else {
         toast({
           title: "Error",
@@ -89,8 +95,12 @@ export default function ContactForm() {
               <Textarea id="message" name="message" placeholder="Your message..." required rows={4} />
             </div>
 
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Submitting..." : "Send Message"}
+            <Button
+              type="submit"
+              className={`w-full ${isSuccess ? "bg-green-600 hover:bg-green-700" : ""}`}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : isSuccess ? "Sent" : "Send Message"}
             </Button>
           </form>
         </CardContent>
