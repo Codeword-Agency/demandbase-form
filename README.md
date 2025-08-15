@@ -1,72 +1,50 @@
-# Contact Form with Google Sheets & Voice Memo Integration
+# Contact Form with Airtable & Voice Memo Integration
 
-A Next.js contact form that saves submissions to Google Sheets and uploads voice memos to Google Drive using native HTML5 audio recording with OAuth authentication.
+A Next.js contact form that saves submissions to Airtable and uploads voice memos as file attachments using native HTML5 audio recording.
 
 ## Features
 
 - **Contact Form**: Name, company, and message fields
 - **Voice Recording**: Native HTML5 audio recording with compression
-- **Google Sheets Integration**: Form submissions saved automatically
-- **Google Drive Storage**: Voice memos uploaded and linked in spreadsheet
-- **OAuth Authentication**: Secure user authentication with Google
+- **Airtable Integration**: Form submissions and voice memos saved automatically
+- **Public Access**: No authentication required - completely open to public use
 - **Real-time Feedback**: Visual recording indicators and success states
 
 ## Setup Instructions
 
-### 1. Create Google Cloud Project & APIs
-1. Go to [Google Cloud Console](https://console.cloud.google.com)
-2. Create a new project or select existing one
-3. Enable these APIs:
-   - Google Sheets API
-   - Google Drive API
+### 1. Create Airtable Base
+1. Go to [Airtable](https://airtable.com) and create a new base
+2. Create a table with these fields:
+   - **Name** (Single line text)
+   - **Company** (Single line text) 
+   - **Message** (Long text)
+   - **Voice Recording** (Attachment)
+   - **Submitted At** (Date & time)
+3. Copy your Base ID from the URL or API documentation
+4. Copy your Table ID (usually the table name like "Table 1" or custom name)
 
-### 2. Create OAuth 2.0 Credentials
-1. Go to "Credentials" → "Create Credentials" → "OAuth 2.0 Client ID"
-2. Configure OAuth consent screen first if prompted:
-   - Choose "External" user type
-   - Fill in required app information
-   - Add your domain to authorized domains
-   - Add scopes: `../auth/spreadsheets` and `../auth/drive.file`
-3. Create OAuth 2.0 Client ID:
-   - Application type: "Web application"
-   - Authorized JavaScript origins: `http://localhost:3000` (for development)
-   - Authorized redirect URIs: `http://localhost:3000/api/auth/callback`
-4. Download the JSON file and extract:
-   - `client_id`
-   - `client_secret`
+### 2. Generate Personal Access Token
+1. Go to [Airtable Account Settings](https://airtable.com/account)
+2. Navigate to "Personal access tokens"
+3. Click "Create new token"
+4. Give it a name (e.g., "Contact Form Integration")
+5. Add these scopes:
+   - `data:records:read`
+   - `data:records:write`
+6. Select your specific base
+7. Copy the generated token (starts with `pat...`)
 
-### 3. Create Google Sheet
-1. Go to [Google Sheets](https://sheets.google.com)
-2. Create a new spreadsheet
-3. Add headers in the first row: `Timestamp`, `Name`, `Company`, `Message`, `Has Voice Memo`, `Voice Memo Link`
-4. Copy the Sheet ID from the URL (the long string between `/d/` and `/edit`)
-5. **Important**: Make sure the sheet is accessible to your Google account (the one you'll authenticate with)
-
-### 4. Create Google Drive Folder (Optional)
-1. Create a folder in Google Drive for voice memos
-2. Copy the folder ID from the URL
-3. **Note**: With OAuth, files will be uploaded to the authenticated user's Drive
-
-### 5. Configure Environment Variables
+### 3. Configure Environment Variables
 Add these to your Vercel project settings or `.env.local`:
 
 \`\`\`env
-# OAuth Configuration
-GOOGLE_CLIENT_ID=your-oauth-client-id.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=your-oauth-client-secret
-GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/callback
-
-# Google Services
-GOOGLE_SHEET_ID=your_google_sheet_id_here
-GOOGLE_DRIVE_FOLDER_ID=your-drive-folder-id (optional)
-
-# App Configuration
-NEXTAUTH_URL=http://localhost:3000
+# Airtable Configuration
+AIRTABLE_PERSONAL_ACCESS_TOKEN=pat_your_personal_access_token_here
+AIRTABLE_BASE_ID=app_your_base_id_here
+AIRTABLE_TABLE_ID=your_table_name_or_id_here
 \`\`\`
 
-**For Production**: Update `GOOGLE_REDIRECT_URI` and `NEXTAUTH_URL` to your production domain.
-
-### 6. Install Dependencies and Run
+### 4. Install Dependencies and Run
 \`\`\`bash
 npm install
 npm run dev
@@ -74,20 +52,19 @@ npm run dev
 
 ## How It Works
 
-1. **Authentication**: User signs in with Google OAuth to grant access to Sheets and Drive
-2. **Form Submission**: User fills out contact form with optional voice memo
-3. **Voice Recording**: Uses MediaRecorder API with WebM/Opus compression
-4. **File Upload**: Voice memos uploaded to user's Google Drive via OAuth
-5. **Sheet Update**: Form data and voice memo links saved to Google Sheets
-6. **User Feedback**: Success indicators and form reset on completion
+1. **Form Submission**: User fills out contact form with optional voice memo
+2. **Voice Recording**: Uses MediaRecorder API with WebM/Opus compression
+3. **Direct Upload**: Form data and voice memo sent directly to Airtable
+4. **File Attachment**: Voice memos stored as file attachments in Airtable
+5. **User Feedback**: Success indicators and form reset on completion
 
-## OAuth vs Service Account
+## Public Access
 
-This app now uses **OAuth authentication** instead of service accounts, which provides:
-- ✅ Access to user's personal Google Drive (no storage quota issues)
-- ✅ More secure user-based permissions
-- ✅ No need to share sheets with service accounts
-- ✅ Better user experience with familiar Google sign-in
+This form is designed for **public use** without authentication:
+- ✅ No login required - completely open access
+- ✅ Direct submission to your Airtable base
+- ✅ Voice memos stored securely in Airtable
+- ✅ Simple setup with just 3 environment variables
 
 ## Browser Compatibility
 
@@ -97,8 +74,7 @@ This app now uses **OAuth authentication** instead of service accounts, which pr
 
 ## Security Features
 
-- OAuth 2.0 authentication (industry standard)
-- Scoped permissions (only access to user's sheets and drive files)
+- Personal Access Token authentication (scoped permissions)
 - No external dependencies for audio recording
 - Compressed audio files to minimize storage usage
-- Secure token handling with HTTP-only cookies
+- Direct API integration with Airtable's secure infrastructure

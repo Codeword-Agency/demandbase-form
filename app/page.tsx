@@ -2,7 +2,6 @@
 
 import type React from "react"
 import VoiceRecorder from "@/components/voice-recorder"
-import GoogleAuth from "@/components/google-auth"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,7 +10,6 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function ContactForm() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [voiceRecording, setVoiceRecording] = useState<Blob | null>(null)
@@ -20,10 +18,6 @@ export default function ContactForm() {
     company: "",
     message: "",
   })
-
-  const handleAuthSuccess = () => {
-    setIsAuthenticated(true)
-  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -35,7 +29,6 @@ export default function ContactForm() {
       name: formData.get("name") as string,
       company: formData.get("company") as string,
       message: formData.get("message") as string,
-      hasVoiceRecording: voiceRecording !== null,
     }
 
     try {
@@ -43,46 +36,14 @@ export default function ContactForm() {
       console.log("[v0] Voice recording exists:", !!voiceRecording)
       console.log("[v0] Voice recording size:", voiceRecording?.size || 0)
 
-      let voiceFileId = null
-      let voiceFileUrl = null
-
+      let voiceRecordingData = null
       if (voiceRecording) {
-        console.log("[v0] Starting audio upload process...")
-
-        const audioFormData = new FormData()
-        audioFormData.append("audio", voiceRecording, `voice-memo-${Date.now()}.webm`)
-        audioFormData.append("name", data.name || "Anonymous")
-        audioFormData.append("company", data.company || "N/A")
-
-        console.log("[v0] Audio FormData prepared, making upload request...")
-
-        try {
-          const audioResponse = await fetch("/api/upload-audio", {
-            method: "POST",
-            body: audioFormData,
-          })
-
-          console.log("[v0] Audio upload response status:", audioResponse.status)
-
-          if (audioResponse.ok) {
-            const audioResult = await audioResponse.json()
-            console.log("[v0] Audio upload successful:", audioResult)
-            voiceFileId = audioResult.fileId
-            voiceFileUrl = audioResult.webViewLink
-          } else {
-            const errorData = await audioResponse.json()
-            console.error("[v0] Audio upload failed:", errorData)
-            alert(`Audio upload failed: ${errorData.error || "Unknown error"}`)
-          }
-        } catch (audioError) {
-          console.error("[v0] Audio upload request failed:", audioError)
-          alert(`Audio upload request failed: ${audioError}`)
-        }
+        console.log("[v0] Converting voice recording to base64...")
+        const arrayBuffer = await voiceRecording.arrayBuffer()
+        voiceRecordingData = Array.from(new Uint8Array(arrayBuffer))
       }
 
-      console.log("[v0] Proceeding with form submission...")
-      console.log("[v0] Voice file ID:", voiceFileId)
-      console.log("[v0] Voice file URL:", voiceFileUrl)
+      console.log("[v0] Submitting to Airtable...")
 
       const response = await fetch("/api/submit", {
         method: "POST",
@@ -91,8 +52,7 @@ export default function ContactForm() {
         },
         body: JSON.stringify({
           ...data,
-          voiceFileId,
-          voiceFileUrl,
+          voiceRecording: voiceRecordingData,
         }),
       })
 
@@ -131,10 +91,6 @@ export default function ContactForm() {
 
   const handleRecordingDelete = () => {
     setVoiceRecording(null)
-  }
-
-  if (!isAuthenticated) {
-    return <GoogleAuth onAuthSuccess={handleAuthSuccess} />
   }
 
   return (
