@@ -1,4 +1,5 @@
 import { google } from "googleapis"
+import { Readable } from "stream"
 
 export async function uploadToGoogleDrive(
   audioBuffer: Buffer,
@@ -50,10 +51,14 @@ export async function uploadToGoogleDrive(
       description: `Voice memo from ${metadata.name} (${metadata.company}) - ${new Date().toISOString()}`,
     }
 
+    const stream = new Readable()
+    stream.push(audioBuffer)
+    stream.push(null) // End the stream
+
     // Upload file
     const media = {
       mimeType: "audio/webm",
-      body: Buffer.from(audioBuffer),
+      body: stream,
     }
 
     console.log("[v0] Uploading to Google Drive:", fileName)
