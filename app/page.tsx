@@ -57,6 +57,14 @@ export default function ContactForm() {
       })
 
       console.log("[v0] Form submission response status:", response.status)
+
+      const contentType = response.headers.get("content-type")
+      if (!contentType || !contentType.includes("application/json")) {
+        const textResponse = await response.text()
+        console.error("[v0] Non-JSON response received:", textResponse)
+        throw new Error(`Server returned non-JSON response: ${response.status}`)
+      }
+
       const responseData = await response.json()
       console.log("[v0] Form submission response data:", responseData)
 
