@@ -4,10 +4,10 @@ import { useEffect, useState } from "react"
 
 export default function VHSOverlay() {
   const [showDisplacementDistortion, setShowDisplacementDistortion] = useState(false)
+  const [turbulenceScale, setTurbulenceScale] = useState(2)
 
   useEffect(() => {
     const triggerDisplacementDistortion = () => {
-      setShowDisplacementDistortion(true)
       // Duration of displacement distortion (500ms to 1.5s)
       const duration = Math.random() * 1000 + 500
       setTimeout(() => {
@@ -24,7 +24,29 @@ export default function VHSOverlay() {
       }, interval)
     }
 
+    const randomizeTurbulence = () => {
+      // Randomly spike the scale from 20 to 200 for brief moments
+      const spikeScale = Math.random() * 180 + 20 // 20-200 range
+      setTurbulenceScale(spikeScale)
+
+      // Return to normal after 50-150ms
+      const spikeDuration = Math.random() * 100 + 50
+      setTimeout(() => {
+        setTurbulenceScale(2) // Back to normal
+      }, spikeDuration)
+    }
+
+    const scheduleRandomTurbulence = () => {
+      // Random interval between 3-8 seconds for turbulence spikes
+      const interval = Math.random() * 5000 + 3000
+      setTimeout(() => {
+        randomizeTurbulence()
+        scheduleRandomTurbulence()
+      }, interval)
+    }
+
     scheduleNext()
+    scheduleRandomTurbulence()
   }, [])
 
   return (
@@ -38,7 +60,7 @@ export default function VHSOverlay() {
             <feDisplacementMap
               in="SourceGraphic"
               in2="baseNoise"
-              scale="2"
+              scale={turbulenceScale}
               xChannelSelector="R"
               yChannelSelector="G"
               result="baseTracked"
