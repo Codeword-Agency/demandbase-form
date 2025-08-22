@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 export default function VHSOverlay() {
   const [showDisplacementDistortion, setShowDisplacementDistortion] = useState(false)
   const [turbulenceScale, setTurbulenceScale] = useState(2);
-  const [baseFreq, setBaseFreq] = useState("");
+  const [baseFreq, setBaseFreq] = useState("0.004 0.1");
 
   useEffect(() => {
     const triggerDisplacementDistortion = () => {
@@ -46,15 +46,11 @@ export default function VHSOverlay() {
       }, interval)
     }
 
-    let starting = 0.1;
     setInterval(() => {
-      if( starting < 200){
-        starting = starting + 0.1;
-      }else{
-        starting = 0.1;
-      }
-      setBaseFreq("0.004 "+starting);
-      }, 1);
+      var starting = Math.random() * 200;
+      var otherStart = Math.random() * 200;
+      setBaseFreq(otherStart+" "+starting);
+      }, 100);
 
 
       
@@ -170,18 +166,18 @@ export default function VHSOverlay() {
       </svg>
 
       <style jsx global>{`
-        body {
+        .site-bg {
           filter: url(#vhs-base);
           transition: filter 0.1s ease-out;
         }
         
-        body.displacement-active {
+        .site-bg.displacement-active {
           filter: url(#vhs-base) url(#displacement-distortion);
         }
         
         @keyframes vhs-scroll {
           0% { transform: translateY(0px); }
-          100% { transform: translateY(4px); }
+          100% { transform: translateY(6px); }
         }
       `}</style>
 

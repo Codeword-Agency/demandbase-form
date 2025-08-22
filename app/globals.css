@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap');
+
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
@@ -11,14 +13,63 @@
   width: 100vw;
   height: 100vh;
   z-index: 9999;
+  top: 0;
+  left: 0;
   pointer-events: none;;
 }
-.site-bg{
+.bg{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  pointer-events: none;
   background-image: url('/bg.png');
   background-position: center;
   background-size: cover;
   background-color: #111c4a;
   background-blend-mode: soft-light;
+}
+.container{
+  width: 80%;
+  margin:0 auto;
+  max-width: 1200px;
+}
+.headliner{
+  width: 58%;
+  margin:0 auto 35px;
+}
+.headliner .logo svg{
+  width:100%;
+  height: auto;
+  display: block;
+}
+.headliner .sub-head{
+  font-size: 48px;
+  color: #4ca3ff;
+  display: flex;
+  justify-content: flex-end;
+}
+.bentos{
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  gap: 30px;
+}
+.bentos .left{
+  flex: 0 0 38%;
+  display: flex;
+  flex-direction: column;
+  justify-self: stretch;
+}
+
+.bentos .right{
+  flex: 0 0 58%;
+}
+
+.handjet{
+  font-family: "Handjet", sans-serif;
 }
 
 :root {
