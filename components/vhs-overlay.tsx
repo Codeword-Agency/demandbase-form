@@ -44,9 +44,9 @@ export default function VHSOverlay() {
               result="baseTracked"
             />
 
-            {/* Subtle RGB separation */}
+            {/* Subtle RGB separation 
             <feOffset in="baseTracked" dx="1" dy="0" result="r" />
-            <feOffset in="baseTracked" dx="-0.5" dy="0" result="b" />
+            <feOffset in="baseTracked" dx="-0.5" dy="0" result="b" /> 
             <feComponentTransfer in="r" result="r2">
               <feFuncR type="discrete" tableValues="1 0 0" />
               <feFuncG type="discrete" tableValues="0 0 0" />
@@ -58,7 +58,7 @@ export default function VHSOverlay() {
               <feFuncB type="discrete" tableValues="0 0 1" />
             </feComponentTransfer>
             <feBlend in="r2" in2="baseTracked" mode="screen" result="rb" />
-            <feBlend in="b2" in2="rb" mode="screen" />
+            <feBlend in="b2" in2="rb" mode="screen" />*/}
           </filter>
 
           <filter id="displacement-distortion" x="-30%" y="-30%" width="160%" height="160%">
@@ -106,34 +106,29 @@ export default function VHSOverlay() {
               result="syncDisplaced"
             />
 
-            {/* Extreme RGB separation with individual displacement */}
-            <feOffset in="syncDisplaced" dx="12" dy="0" result="rShift" />
-            <feOffset in="syncDisplaced" dx="-8" dy="1" result="bShift" />
-            <feOffset in="syncDisplaced" dx="0" dy="-2" result="gShift" />
+            <feOffset in="syncDisplaced" dx="8" dy="0" result="rShift" />
+            <feOffset in="syncDisplaced" dx="-4" dy="0" result="bShift" />
+            <feOffset in="syncDisplaced" dx="0" dy="0" result="gShift" />
 
-            <feDisplacementMap in="rShift" in2="majorNoise" scale="10" result="rDisplaced" />
-            <feDisplacementMap in="bShift" in2="detailNoise" scale="8" result="bDisplaced" />
-            <feDisplacementMap in="gShift" in2="jitterNoise" scale="6" result="gDisplaced" />
-
-            <feComponentTransfer in="rDisplaced" result="redChannel">
-              <feFuncR type="discrete" tableValues="1 0.8 1 0.6 1 0.9" />
-              <feFuncG type="discrete" tableValues="0 0.2 0 0.1 0 0.15" />
-              <feFuncB type="discrete" tableValues="0.8 0 0.9 0 0.7 0" />
+            <feComponentTransfer in="rShift" result="redChannel">
+              <feFuncR type="identity" />
+              <feFuncG type="discrete" tableValues="0" />
+              <feFuncB type="discrete" tableValues="0" />
             </feComponentTransfer>
-            <feComponentTransfer in="bDisplaced" result="blueChannel">
-              <feFuncR type="discrete" tableValues="0 0.1 0.2 0 0.15 0" />
-              <feFuncG type="discrete" tableValues="0.9 0 0.8 0.2 0.85 0" />
-              <feFuncB type="discrete" tableValues="1 0.7 1 0.5 1 0.8" />
+            <feComponentTransfer in="bShift" result="blueChannel">
+              <feFuncR type="discrete" tableValues="0" />
+              <feFuncG type="discrete" tableValues="0" />
+              <feFuncB type="identity" />
             </feComponentTransfer>
-            <feComponentTransfer in="gDisplaced" result="greenChannel">
-              <feFuncR type="discrete" tableValues="0.1 0 0.2 0 0.05 0" />
-              <feFuncG type="discrete" tableValues="1 0.9 1 0.8 1 0.95" />
-              <feFuncB type="discrete" tableValues="0.1 0 0.2 0 0.05 0" />
+            <feComponentTransfer in="gShift" result="greenChannel">
+              <feFuncR type="discrete" tableValues="0" />
+              <feFuncG type="identity" />
+              <feFuncB type="discrete" tableValues="0" />
             </feComponentTransfer>
 
-            <feBlend in="redChannel" in2="syncDisplaced" mode="screen" result="rg" />
-            <feBlend in="blueChannel" in2="rg" mode="screen" result="rgb" />
-            <feBlend in="greenChannel" in2="rgb" mode="screen" />
+            <feBlend in="redChannel" in2="syncDisplaced" mode="normal" result="rg" />
+            <feBlend in="blueChannel" in2="rg" mode="normal" result="rgb" />
+            <feBlend in="greenChannel" in2="rgb" mode="normal" />
           </filter>
         </defs>
       </svg>
