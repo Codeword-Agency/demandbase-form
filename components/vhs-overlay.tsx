@@ -13,7 +13,7 @@ export default function VHSOverlay() {
       const duration = Math.random() * 1000 + 500
       setTimeout(() => {
         setShowDisplacementDistortion(false)
-      }, duration)
+      }, duration) 
     }
 
     const scheduleNext = () => {
