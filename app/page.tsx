@@ -102,7 +102,8 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="site-bg min-h-screen flex items-center justify-center p-4">
+      <div className="fw"></div>
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Contact Us</CardTitle>

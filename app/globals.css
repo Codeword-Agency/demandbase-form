@@ -3,6 +3,24 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.fw{
+  background-image: url('/fw.png');
+  background-position: center;
+  background-size: cover;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;;
+}
+.site-bg{
+  background-image: url('/bg.png');
+  background-position: center;
+  background-size: cover;
+  background-color: #111c4a;
+  background-blend-mode: soft-light;
+}
+
 :root {
   --background: black ;
   --foreground: oklch(0.145 0 0);

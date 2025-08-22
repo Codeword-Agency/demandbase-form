@@ -4,7 +4,8 @@ import { useEffect, useState } from "react"
 
 export default function VHSOverlay() {
   const [showDisplacementDistortion, setShowDisplacementDistortion] = useState(false)
-  const [turbulenceScale, setTurbulenceScale] = useState(2)
+  const [turbulenceScale, setTurbulenceScale] = useState(2);
+  const [baseFreq, setBaseFreq] = useState("");
 
   useEffect(() => {
     const triggerDisplacementDistortion = () => {
@@ -16,8 +17,8 @@ export default function VHSOverlay() {
     }
 
     const scheduleNext = () => {
-      // Random interval between 15-30 seconds
-      const interval = Math.random() * 15000 + 15000
+      // Random interval between 60-120 seconds
+      const interval = Math.random() * 60000 + 120000
       setTimeout(() => {
         triggerDisplacementDistortion()
         scheduleNext()
@@ -38,12 +39,25 @@ export default function VHSOverlay() {
 
     const scheduleRandomTurbulence = () => {
       // Random interval between 3-8 seconds for turbulence spikes
-      const interval = Math.random() * 5000 + 3000
+      const interval = Math.random() * 60000 + 3000
       setTimeout(() => {
         randomizeTurbulence()
         scheduleRandomTurbulence()
       }, interval)
     }
+
+    let starting = 0.1;
+    setInterval(() => {
+      if( starting < 200){
+        starting = starting + 0.1;
+      }else{
+        starting = 0.1;
+      }
+      setBaseFreq("0.004 "+starting);
+      }, 1);
+
+
+      
 
     scheduleNext()
     scheduleRandomTurbulence()
@@ -56,7 +70,7 @@ export default function VHSOverlay() {
         <defs>
           <filter id="vhs-base" x="-10%" y="-10%" width="120%" height="120%">
             {/* Light continuous tracking */}
-            <feTurbulence baseFrequency="0.001 0.4" numOctaves="1" result="baseNoise" />
+            <feTurbulence baseFrequency={baseFreq} numOctaves="1" result="baseNoise" />
             <feDisplacementMap
               in="SourceGraphic"
               in2="baseNoise"
@@ -186,7 +200,7 @@ export default function VHSOverlay() {
 
       {/* VHS Overlay - Always visible with continuous effect */}
       <div
-        className="fixed inset-0 pointer-events-none z-50 opacity-100"
+        className="the-filter fixed inset-0 pointer-events-none z-50 opacity-100"
         style={{
           mixBlendMode: "multiply",
         }}
