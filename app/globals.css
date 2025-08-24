@@ -45,6 +45,7 @@
   width:100%;
   height: auto;
   display: block;
+  filter: drop-shadow(0 0 5.8 #ff7c33);
 }
 .headliner .sub-head{
   font-size: 48px;
@@ -90,6 +91,9 @@
   filter: drop-shadow(0 0 5.8 #fff);
   border-color: #fff;
 }
+.dj-booth *{
+  filter: none;
+}
 .dj-booth img{
   aspect-ratio: 1;
   object-fit: cover;
@@ -117,6 +121,9 @@
   font-size: 32px;
   color: #fff;
 }
+.tune-in *{
+  filter:none;
+}
 .tune-in:before{
   content:"Tune In";
   position: absolute;
@@ -137,6 +144,9 @@
   color:#fff;
   filter: drop-shadow(0 0 5.8 #ff7c33);
   border-color: #ff7c33;
+}
+.stories *{
+  filter: none;;
 }
 .stories:before{
     content:"Tonight's Show";
@@ -184,6 +194,9 @@
   border-left: 4px solid #ff7c33;
   padding:35px;
   margin-bottom: 80px;
+}
+.forms *{
+  filter: none;
 }
 .forms .title{
   color:#ff7c33;
