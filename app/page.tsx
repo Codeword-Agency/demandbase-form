@@ -131,61 +131,62 @@ export default function ContactForm() {
         {/* information */}
         <div className="bentos">
           <div className="left">
-            <div className="outline dj-booth">
+            <div className="outliner white dj-booth">
               <img src="https://media.tenor.com/on6WFzYlLJcAAAAM/pokemon-cute.gif" />
             </div>
-            <div className="outline tune-in">
+            <div className="outliner tune-in">
               player goes here
             </div>
           </div>
           <div className="right">
-            <div className="outline stories handjet">
+            <div className="outliner stories handjet">
+              <div className="stories-scroll">
               <h2>Data Horror Stories</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur venenatis tellus vitae condimentum imperdiet. Aenean mauris lacus, rutrum vel aliquam eget, volutpat eget velit. Quisque malesuada pulvinar odio, id interdum mauris rutrum eget. Morbi id iaculis ligula. Fusce a consequat augue. Pellentesque mi tellus, finibus sit amet odio non, luctus efficitur massa. Etiam eget augue id magna fermentum rhoncus at eu augue. Cras pretium nulla in nisl tristique, ut tincidunt eros pulvinar. Ut elementum est viverra arcu ultrices bibendum. Ut euismod luctus iaculis. Curabitur dignissim sapien nec felis fermentum, eu consequat mauris tincidunt. Phasellus enim lorem, bibendum sed vehicula quis, consequat at lorem. Nullam mattis nisl in aliquet vulputate.</p>
               <p>Maecenas suscipit sagittis sagittis. Suspendisse lectus nunc, ullamcorper a sem quis, euismod dignissim massa. Nullam eu nisi molestie metus auctor semper. Curabitur volutpat est id rutrum dapibus. Etiam elementum vestibulum nisi sit amet interdum. Nullam porttitor enim quam, ac consequat augue euismod a. Nam id tincidunt ipsum, ac dignissim ligula.</p>
               <p>Donec auctor vel libero ac mollis. Integer eleifend sagittis lorem, sit amet convallis eros. Aliquam vitae ante lacinia, placerat nibh maximus, malesuada ante. Fusce sollicitudin lacinia molestie. Pellentesque id erat molestie, tincidunt dui ut, euismod sem. Donec convallis nisl ac risus imperdiet, sed feugiat mi pulvinar. Proin ac porttitor lectus, non malesuada nibh. Fusce at arcu vel tortor lacinia vehicula. Donec luctus magna eu pharetra tempor. Etiam vel nibh sed odio accumsan commodo. Cras quis scelerisque enim, commodo condimentum nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit elit augue, nec volutpat turpis congue nec.</p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* form */}
-      <Card className="w-full handjet">
-        <CardHeader>
-          <CardTitle>Contact Us</CardTitle>
-          <CardDescription>Send us a message and we'll get back to you soon.</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="w-full forms handjet">
+          <CardTitle className="title">Caller, you're next on the request line</CardTitle>
+          <CardDescription className="description"><p>Let us know who you are os we can give you a shout-out on air.</p>
+          <p>Feel free to stay anonymous for some extra mystique.</p></CardDescription>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Name (Optional)</Label>
+
+            <div className="space-y-2 input">
+              <Label className="visually-hidden" htmlFor="name">Name (Optional)</Label>
               <Input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Your name"
+                placeholder="Name (Optional)"
                 value={formValues.name}
                 onChange={handleInputChange}
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="company">Company (Optional)</Label>
+            <div className="space-y-2 input">
+              <Label className="visually-hidden" htmlFor="company visually-hidden">Company (Optional)</Label>
               <Input
                 id="company"
                 name="company"
                 type="text"
-                placeholder="Your company"
+                placeholder="Company (Optional)"
                 value={formValues.company}
                 onChange={handleInputChange}
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="message">Message *</Label>
+            <div className="space-y-2 textarea">
+              <Label className="visually-hidden" htmlFor="message visually-hidden">Message *</Label>
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Your message..."
+                placeholder="Your horror story..."
                 required
                 rows={4}
                 value={formValues.message}
@@ -193,21 +194,24 @@ export default function ContactForm() {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label>Voice Memo (Optional)</Label>
-              <VoiceRecorder onRecordingComplete={handleRecordingComplete} onRecordingDelete={handleRecordingDelete} />
+            <div className="button-wrap">
+              <div className="space-y-2 voice">
+                <Label>Voice Memo (Optional)</Label>
+                <VoiceRecorder onRecordingComplete={handleRecordingComplete} onRecordingDelete={handleRecordingDelete} />
+              </div>
+              <div className="space-y-2 button">
+                <Label>&nbsp;</Label>
+              <Button
+                type="submit"
+                className={`w-full  ${isSuccess ? "bg-green-600 hover:bg-green-700" : ""}`}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : isSuccess ? "Sent" : "Send Message"}
+              </Button>
+              </div>
             </div>
-
-            <Button
-              type="submit"
-              className={`w-full ${isSuccess ? "bg-green-600 hover:bg-green-700" : ""}`}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Submitting..." : isSuccess ? "Sent" : "Send Message"}
-            </Button>
           </form>
-        </CardContent>
-      </Card>
+      </div>
       </div>
     </div>
     </>
