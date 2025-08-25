@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 export default function VHSOverlay() {
   const [showDisplacementDistortion, setShowDisplacementDistortion] = useState(false)
   const [turbulenceScale, setTurbulenceScale] = useState(2);
-  const [baseFreq, setBaseFreq] = useState("");
+  const [baseFreq, setBaseFreq] = useState("0.004 0.2");
 
   useEffect(() => {
     const triggerDisplacementDistortion = () => {

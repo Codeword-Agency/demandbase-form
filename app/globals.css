@@ -55,7 +55,7 @@
 }
 .bentos{
   display: flex;
-  justify-content: stretch;
+  justify-content: space-between;
   align-items: stretch;
   gap: 30px;
   margin-top: 55px;
