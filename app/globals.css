@@ -57,9 +57,9 @@
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  gap: 15px;
+  gap: 30px;
   margin-top: 55px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 .bentos .left{
   flex: 0 0 38%;
@@ -71,7 +71,7 @@
 }
 
 .bentos .right{
-  flex: 0 0 58%;
+  flex: 1 0 58%;
 }
 
 .handjet{
@@ -159,7 +159,7 @@
 .stories-scroll{
   font-size: 32px;
   line-height: 1;
-  max-height: 51vh;
+  max-height: 60vh;
   overflow: scroll;
   display: block;
 }
