@@ -134,7 +134,7 @@ export default function ContactForm() {
         <div className="bentos">
           <div className="left">
             <div className="outliner white dj-booth">
-              <img src="https://media.tenor.com/on6WFzYlLJcAAAAM/pokemon-cute.gif" />
+              <img src="/djbones.png" />
             </div>
             <div className="outliner tune-in">
               player goes here
