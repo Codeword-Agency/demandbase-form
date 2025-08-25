@@ -57,9 +57,9 @@
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  gap: 30px;
+  gap: 15px;
   margin-top: 55px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 .bentos .left{
   flex: 0 0 38%;
@@ -90,6 +90,7 @@
 .dj-booth{
   box-shadow: 0 0 5.8 #fff;
   border-color: #fff;
+  margin-bottom: 67px;
 }
 .dj-booth img{
   aspect-ratio: 1;

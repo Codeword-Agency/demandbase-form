@@ -6,10 +6,8 @@ interface FloatingImagesProps {
     imageUrls?: string[]
 }
 
-const FloatingImages = ({imageUrls = ['https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzk0bnJ6YzdjZ2phMjNmMzBmdnV0Zm5hN2ZvbTVrdnFqMmE4azY4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QuxqWk7m9ffxyfoa0a/giphy.gif',
-        'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjdhaWJkd2x2dmNwdjlycDRqZjZxMWhmeWJiemtjZWF1anpneHR6cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BvC7TmEd7odbi/giphy.gif',
-        'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnV6NmVscHNuOHhrMHBzN3p0azlmcml1d3htMmEwNmNhNmY0dG16aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TFUYv2jzl9L9Kv2x4N/giphy.gif',
-        'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcm15cDV1MTh5MGZ1Y2NwcG4xajJ4eGU0ejVpb2c4cm1hdG05cDBiOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XUHaEglC894hq/giphy.gif'
+const FloatingImages = ({imageUrls = ['/icon-1.png',
+        '/icon-2.png',
     ] }: FloatingImagesProps) => {
 
     const [images, setImages] = useState([
