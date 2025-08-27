@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import VHSOverlay from "@/components/vhs-overlay"
+import CRTScreen from "@/components/crt-effect"
 
 export const metadata: Metadata = {
   title: "v0 App",
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body>
+        <CRTScreen />
         {children}
         <VHSOverlay />
       </body>

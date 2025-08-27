@@ -15,6 +15,7 @@ export interface FormSubmission {
   name?: string
   company?: string
   message: string
+  email?: string
   voice_recording_url?: string
   created_at?: string
 }

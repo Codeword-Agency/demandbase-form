@@ -39,7 +39,7 @@ export default function VHSOverlay() {
 
     const scheduleRandomTurbulence = () => {
       // Random interval between 3-8 seconds for turbulence spikes
-      const interval = Math.random() * 60000 + 3000
+      const interval = Math.random() * 10000 + 3000
       setTimeout(() => {
         randomizeTurbulence()
         scheduleRandomTurbulence()

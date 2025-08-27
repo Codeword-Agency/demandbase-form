@@ -4,8 +4,8 @@ import { supabase, isSupabaseConfigured, type FormSubmission } from "@/lib/supab
 export async function POST(request: NextRequest) {
   try {
     console.log("[v0] API route called")
-    const { name, company, message, voiceRecording } = await request.json()
-    console.log("[v0] Request data:", { name, company, message, hasVoiceRecording: !!voiceRecording })
+    const { name, company, message, email, voiceRecording } = await request.json()
+    console.log("[v0] Request data:", { name, company, message, email, hasVoiceRecording: !!voiceRecording })
 
     // Validate required fields
     if (!message || message.trim() === "") {
@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
         name: name || "",
         company: company || "",
         message: message,
+        email: email || "",
         voice_recording_url: voiceRecordingUrl,
       }
       console.log("[v0] Form data prepared:", formData)
