@@ -29,7 +29,7 @@
   background-position: center;
   background-size: cover;
   background-color: #000;
-  /* background-blend-mode: hard-light; */
+  background-blend-mode: hard-light;
 }
 
 .enter-gate{
