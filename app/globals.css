@@ -42,7 +42,8 @@
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 9999999999999
+  z-index: 9999999999999;
+  background-color: #000;
 }
 .enter-gate .enter-wrap{
   display: flex;
@@ -106,9 +107,11 @@
   align-items: center;
   margin: 0 auto;
   width: 80%;
+  max-width: 1200px;
 }
 .headliner img{
   width: 45%;
+  max-width: 400px;
 }
 
 .headliner .sub-head{
