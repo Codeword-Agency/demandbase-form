@@ -150,7 +150,7 @@ export default function Carousel({ children }: CarouselProps) {
               onClick={() => goToSlide(index)}
               className={`w-4 h-4 rounded-full transition-all duration-200 border-2 ${
                 index === currentIndex
-                  ? "bg-white border-white shadow-lg scale-110"
+                  ? "bg-white active shadow-lg scale-110"
                   : "bg-white/30 border-white/50 hover:bg-white/50 hover:border-white/70"
               }`}
               aria-label={`Go to slide ${index + 1}`}

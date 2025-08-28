@@ -152,7 +152,8 @@ export default function ContactForm() {
               <div className="stories-scroll">
                 <h1>Tonight's Show</h1>
               <h2>Data Horror Stories</h2>
-              <p>Bad data never sleeps. Neither will you. These aren't ghost stories from summer camp. These are real-life stories of when bad data caused chaos: campaigns that failed, forecasts that collapsed, signals that went nowhere. Everyone has one of these stories, and we're giving them a place to tell it. Call in. Rage out. This is a safe space.</p>
+              <p>Bad data never sleeps. Neither will you. These aren't ghost stories from summer camp. These are real-life stories of when bad data caused chaos: campaigns that failed, forecasts that collapsed, signals that went nowhere. Everyone has one of these stories, and we're giving them a place to tell it. Call in. Rage out.</p> 
+              <p>This is a safe space.</p>
               </div>
             </div>
           </div>
