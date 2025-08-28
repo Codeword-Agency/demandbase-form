@@ -250,20 +250,20 @@ export default function ContactForm() {
                <Carousel>
               <CarouselItem>
                 <div className="leaky-lead-linda"></div>
-                    <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
-                    <p className="auth">Anonymous 1</p>
+                    <p>“Our CRM wasn't a database; it was a graveyard full of ghost leads and dead-end accounts. My job was to haunt it, looking for a sign of life.”</p>
+                    <p className="auth">Leaky-Lead Linda</p>
               </CarouselItem>
 
               <CarouselItem>
                 <div className="failed-ad-frank"></div>
-                    <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
-                    <p className="auth">Anonymous 2</p>
+                    <p>“They asked why the campaign failed. I knew the answer. I’d trusted dirty data, and it betrayed me in front of everyone.”</p>
+                    <p className="auth">Failed-Ad Frank</p>
               </CarouselItem>
 
               <CarouselItem>
                 <div className="no-click-nick"></div>
-                    <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
-                    <p className="auth">Anonymous 3</p>
+                    <p>“The sales team said my leads were garbage. I checked the source: a three-year-old spreadsheet I found on a shared drive. I didn't generate leads—I disturbed a tomb.”</p>
+                    <p className="auth">No-Click Nick</p>
               </CarouselItem>
               
             </Carousel>
