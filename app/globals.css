@@ -31,6 +31,59 @@
   background-color: #000;
   background-blend-mode: exclusion;
 }
+
+.enter-gate{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 9999999999999
+}
+.enter-gate .enter-wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding:73px 14vw 52px
+}
+.enter-gate p{
+  color: #fff;
+  font-size: 25px;
+  line-height: 120%;
+  font-weight: 400;
+  text-align: center;
+}
+.enter-gate button{
+  background-color: #Ec1E1E;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 600;
+  box-shadow: 4px 4px #861111 inset;
+  border-radius: 0;
+  margin:45px auto 0;
+  cursor: pointer;
+}
+.enter-gate video{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  object-fit: cover;
+}
+.enter-gate.entered{
+  opacity: 0;
+  transition: opacity 1.3s ease-in-out;
+  pointer-events: none;;
+}
+
+
 .container{
   width: 80%;
   margin:0 auto;
@@ -85,6 +138,10 @@
 .bentos .right{
   flex: 1 0 58%;
 }
+.bentos .right-50,
+.bentos .left-50{
+  flex: 1 0 50%;
+}
 
 .handjet{
   font-family: "Aldrich", sans-serif;
@@ -113,6 +170,9 @@
   margin-bottom: 30px;
   color: #fff;
   text-transform: uppercase;
+}
+.outliner h1 .RIP{
+  font-size: 22px;
 }
 .outliner p{
   color: #fff;
@@ -213,12 +273,12 @@
   border-radius: 0;
   font-size: 22px;
   line-height: 1;
-  background-color: #0D1846;
+  background-color: #EC1E1E;
   color:white;
   padding:15px 20px;
   height: auto;
   font-weight: 400;
-  box-shadow: 4px 4px 0 0 #4ca3ff inset;
+  box-shadow: 4px 4px 0 0 #861111 inset;
   cursor: pointer;
 }
 .forms .button-wrap{

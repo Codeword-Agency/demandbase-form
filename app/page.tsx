@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { CardDescription, CardTitle } from "@/components/ui/card"
+import { CornerDownRight } from "lucide-react"
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -106,18 +107,32 @@ export default function ContactForm() {
   return (
     <>
     <div className="fw"></div>
-    <div className="bg"></div>
-    
-    <div className="site-bg min-h-screen p-4">
-      
 
+    <div className="enter-gate">
+      <video autoPlay loop muted preload="auto" id="enterGate">
+        <source src="/video/gate.mp4" type="video/mp4" />
+      </video>
+      <div className="enter-wrap">
+        <img src="/LOGO-NEW.svg" />
+        <p>Haunted by bad data?</p>
+        <p>Tell us your horror story</p>
+        <Button
+          type="enter"
+          className={`enter`}
+          onClick={ () => {document.querySelector('.enter-gate')?.classList.add('entered')}}
+        > Enter
+        </Button>
+      </div>
+    </div>
+
+    <div className="site-bg min-h-screen p-4">
       <div className="container">
         {/* Headliner */}
         <div className="headliner">
       <div className="headline-wrap">
-          <img src="/LOGO.svg" />
+          <img src="/LOGO-NEW.svg" />
           <div className="tune-in">
-              <iframe data-testid="embed-iframe" src="https://open.spotify.com/embed/playlist/2N30bJpFW4AFlnxgtqfZlx?utm_source=generator" width="100%" height="152" frameBorder="0" allowFullScreen=" " allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+              <iframe data-testid="embed-iframe" src="https://open.spotify.com/embed/track/6mdNDFZ3ra73C3ovkc9TI1?utm_source=generator&theme=0" width="100%" height="138" allow="autoplay;" loading="lazy"></iframe>
             </div>
           </div>
         </div>
@@ -210,15 +225,33 @@ export default function ContactForm() {
                 type="submit"
                 className={`w-full  ${isSuccess ? "bg-green-600 hover:bg-green-700" : ""}`}
                 disabled={isSubmitting}
-              >
-                {isSubmitting ? "Submitting..." : isSuccess ? "Sent" : "Send Message"}
+              ><CornerDownRight />
+                {isSubmitting ? "Submitting..." : isSuccess ? "Sent" : "Share your story"}
               </Button>
               </div>
             </div>
           </form>
       </div>
+        <div className="bentos">
+          <div className="left-50">
+            <div className="outliner">
+              <h1>Live studio Feed</h1>
+              <p>Watch the horror unfold in real time.</p>
+              <video autoPlay loop muted preload="auto" id="studioFeed">
+                <source src="/video/feed.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+          <div className="right-50">
+            <div className="outliner">
+              <h1>Past Callers <span className="  ">(RIP)</span></h1>
+              <p>Few live to tell the tale...</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <div className="bg"></div>
     </>
   )
 }
