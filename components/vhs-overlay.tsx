@@ -29,7 +29,7 @@ export default function VHSOverlay() {
       // Randomly spike the scale from 20 to 200 for brief moments
       const spikeScale = Math.random() * 180 + 20 // 20-200 range
       setTurbulenceScale(spikeScale)
-
+      document.querySelector('.site-bg').classList.toggle('spooky')
       // Return to normal after 50-150ms
       const spikeDuration = Math.random() * 100 + 50
       setTimeout(() => {

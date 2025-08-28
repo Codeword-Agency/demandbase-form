@@ -143,7 +143,7 @@ export default function ContactForm() {
           <div className="left">
             <div className="outliner white dj-booth">
               <h1>Tonight's DJ</h1>
-              <img src="/people/Data-Dread-1.png" />
+              <div className="data-dread"></div>
               <p>Everyone talks about data wins. Data Dread is only interested in talking about the losses. Call in to your favorite on-air exorcist to talk about all things static, panic, and bad data.</p>
             </div>
           </div>
@@ -249,19 +249,19 @@ export default function ContactForm() {
               <p>Few live to tell the tale...</p>
                <Carousel>
               <CarouselItem>
-                 <img src="/people/leaky-lead-linda-1.png" />
+                <div className="leaky-lead-linda"></div>
                     <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
                     <p className="auth">Anonymous 1</p>
               </CarouselItem>
 
               <CarouselItem>
-                 <img src="/people/failed-ad-frank-1.png" />
+                <div className="failed-ad-frank"></div>
                     <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
                     <p className="auth">Anonymous 2</p>
               </CarouselItem>
 
               <CarouselItem>
-                 <img src="/people/no-click-nick-1.png" />
+                <div className="no-click-nick"></div>
                     <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
                     <p className="auth">Anonymous 3</p>
               </CarouselItem>

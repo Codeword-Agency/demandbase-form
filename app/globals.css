@@ -204,6 +204,11 @@
   font-size: 28px;
   margin-bottom: 1em;
 }
+.outliner img,
+.outliner video{
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
 .dj-booth p{
   font-size: 19px;
 }
@@ -222,6 +227,61 @@
   font-weight: 400;
 }
 
+.outliner .data-dread{
+  background-image: url('/people/Data-Dread-1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  aspect-ratio: 1;
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+.spooky .outliner .data-dread{
+  background-image: url('/people/Data-Dread-2.png');
+}
+
+.outliner .leaky-lead-linda{
+  background-image: url('/people/leaky-lead-linda-1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  aspect-ratio: 1;
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+.spooky .outliner .leaky-lead-linda{
+  background-image: url('/people/leaky-lead-linda-2.png');
+}
+
+.outliner .failed-ad-frank{
+  background-image: url('/people/failed-ad-frank-1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  aspect-ratio: 1;
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+.spooky .outliner .failed-ad-frank{
+  background-image: url('/people/failed-ad-frank-2.png');
+}
+
+.outliner .no-click-nick{
+  background-image: url('/people/no-click-nick-1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  aspect-ratio: 1;
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+.spooky .outliner .no-click-nick{
+  background-image: url('/people/no-click-nick-2.png');
+}
 
 .forms{
   font-size: 30px;
