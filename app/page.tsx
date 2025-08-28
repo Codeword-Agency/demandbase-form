@@ -142,8 +142,7 @@ export default function ContactForm() {
         <div className="bentos">
           <div className="left">
             <div className="outliner white dj-booth">
-              <h1>Tonight’s DJ:</h1>
-              <h2>Data Dread</h2>
+              <h1>Tonight's DJ</h1>
               <div className="data-dread"></div>
               <p>Everyone talks about data wins. Data Dread is only interested in talking about the losses. Call in to your favorite on-air exorcist to talk about all things static, panic, and bad data.</p>
             </div>
@@ -251,26 +250,53 @@ export default function ContactForm() {
                <Carousel>
               <CarouselItem>
                 <div className="leaky-lead-linda"></div>
-                    <p>"Our CRM wasn't a database; it was a graveyard full of ghost leads and dead-end accounts. My job was to haunt it, looking for a sign of life."</p>
-                    <p className="auth">Leaky-Lead Linda</p>
+                    <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
+                    <p className="auth">Anonymous 1</p>
               </CarouselItem>
 
               <CarouselItem>
                 <div className="failed-ad-frank"></div>
-                    <p>“They asked why the campaign failed. I knew the answer. I’d trusted dirty data, and it betrayed me in front of everyone.”</p>
-                    <p className="auth">Failed-Ad Frank</p>
+                    <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
+                    <p className="auth">Anonymous 2</p>
               </CarouselItem>
 
               <CarouselItem>
                 <div className="no-click-nick"></div>
-                    <p>“The sales team said my leads were garbage. I checked the source: a three-year-old spreadsheet I found on a shared drive. I didn't generate leads—I disturbed a tomb.”</p>
-                    <p className="auth">No-Click Nick</p>
+                    <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
+                    <p className="auth">Anonymous 3</p>
               </CarouselItem>
               
             </Carousel>
             </div>
           </div>
         </div>
+
+        <div className="socials">
+          <div className="socials-wrap">
+            <a href="https://www.demandbase.com/" target="_blank">
+            <img src="/socials/website-button.png" />
+            </a>
+
+            <a href="https://x.com/Demandbase/" target="_blank">
+            <img src="/socials/x-button.png" />
+            </a>
+
+             <a href="https://www.linkedin.com/company/demandbase/" target="_blank">
+            <img src="/socials/linkedin-button.png" />
+            </a>
+
+            <a href="https://www.instagram.com/demandbase/" target="_blank">
+            <img src="/socials/IG-button.png" />
+            </a>
+          </div>
+
+          <div className="main-logo">
+            <p>Brought to you by</p>
+            <p><img src="/socials/demandbase_full_neon.png" /></p>
+          </div>
+        </div>
+
+
       </div>
     </div>
     <div className="bg"></div>

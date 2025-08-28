@@ -376,7 +376,25 @@
   width: 100%;
 }
 
+.socials .socials-wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
 
+.socials .socials-wrap a{
+  flex: 0 0 20%;
+}
+.socials .main-logo{
+  text-align: center;
+  color:#fff;
+  font-size: 20px;
+  line-height: 120%;
+}
+.socials .main-logo img{
+  margin: 0 auto
+}
 
 /* exciting things are happening */
  canvas {
