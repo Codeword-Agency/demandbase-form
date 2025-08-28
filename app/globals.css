@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Aldrich&display=swap');
 
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
-body{
-  font-family: "Rubik", sans-serif;
-}
+
 .fw{
   background-image: url('/fw.png');
   background-position: center;
@@ -53,7 +51,8 @@ body{
   justify-content: center;
   align-items: center;
   background-color: black;
-  padding:73px 14vw 52px
+  padding:73px 14vw 52px;
+  font-family: "Aldrich", sans-serif;
 }
 .enter-gate p{
   color: #fff;
@@ -159,30 +158,30 @@ body{
 }
 .carousel .carousel-item p.auth{
   width: 100%;
-  font-size: 30px;
   text-align: right;
   color: #EC1E1E;
 }
 .carousel .carousel-item p.auth:before{
   content: "- ";
-  font-size: 30px;
   display: inline-block;
   margin-right: 10px;
   color: white;
 }
+
 .carousel button{
   cursor: pointer;
 }
+
 .carousel button.active{
   background-color: #EC1E1E !important;
   border:none;
 }
 
 .handjet{
-  font-family: "Rubik", sans-serif;
+  font-family: "Aldrich", sans-serif;
 }
 .outliner{
-  font-family: "Rubik", sans-serif;
+  font-family: "Aldrich", sans-serif;
   padding:35px;
   display: flex;
   justify-content: center;
@@ -194,15 +193,15 @@ body{
 .outliner h1{
   color: #Ec1E1E;
   text-shadow: 0 0 5.8px #Ec1E1E;
-  font-size: 32px;
+  font-size: 30px;
   line-height:80%;
   text-transform: uppercase;
   margin-bottom: 20px;
   font-family: "Chelsea Market", system-ui;
 }
 .outliner h2{
-  font-size: 72px;
-  line-height:100%;
+  font-size: 30px;
+  line-height:80%;
   margin-bottom: 30px;
   color: #fff;
   text-transform: uppercase;
@@ -222,7 +221,7 @@ body{
   border-radius: 20px;
 }
 .dj-booth p{
-  font-size: 25px;
+  font-size: 19px;
 }
 .tune-in{
   font-size: 32px;
@@ -234,7 +233,7 @@ body{
 
 .stories p{
   margin-bottom: 1em;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 120%;
   font-weight: 400;
 }
@@ -298,7 +297,7 @@ body{
 .forms{
   font-size: 30px;
   color: #fff;
-  font-family: "Rubik", sans-serif;
+  font-family: "Aldrich", sans-serif;
   padding:35px;
   margin-bottom: 80px;
   background-color: #000;
@@ -306,7 +305,7 @@ body{
 .forms .title{
   color: #Ec1E1E;
   text-shadow: 0 0 5.8px #Ec1E1E;
-  font-size: 42px;
+  font-size: 30px;
   line-height:80%;
   text-transform: uppercase;
   margin-bottom: 20px;
@@ -315,8 +314,7 @@ body{
 .forms .description p{
   color: #fff;
   line-height: 120%;
-  font-size: 25px;
-  font-weight: 400;
+  font-size: 28px;
   margin-bottom: 20px;
 }
 .forms input,
