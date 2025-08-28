@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { CardDescription, CardTitle } from "@/components/ui/card"
+import Carousel, { CarouselItem } from "@/components/ui/carousel"
 import { CornerDownRight } from "lucide-react"
 
 export default function ContactForm() {
@@ -233,7 +234,7 @@ export default function ContactForm() {
           </form>
       </div>
         <div className="bentos">
-          <div className="left-50">
+          <div className="left-half">
             <div className="outliner">
               <h1>Live studio Feed</h1>
               <p>Watch the horror unfold in real time.</p>
@@ -242,10 +243,30 @@ export default function ContactForm() {
               </video>
             </div>
           </div>
-          <div className="right-50">
+          <div className="right-half">
             <div className="outliner">
               <h1>Past Callers <span className="  ">(RIP)</span></h1>
               <p>Few live to tell the tale...</p>
+               <Carousel>
+              <CarouselItem>
+                 <img src="/djbones.png" />
+                    <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
+                    <p className="auth">Anonymous 1</p>
+              </CarouselItem>
+
+              <CarouselItem>
+                 <img src="/djbones.png" />
+                    <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
+                    <p className="auth">Anonymous 2</p>
+              </CarouselItem>
+
+              <CarouselItem>
+                 <img src="/djbones.png" />
+                    <p>"They asked how the campiagn failed. I knew the answer. I'd trusted dirty data, and it betrayed me in front of everyone"</p>
+                    <p className="auth">Anonymous 3</p>
+              </CarouselItem>
+              
+            </Carousel>
             </div>
           </div>
         </div>

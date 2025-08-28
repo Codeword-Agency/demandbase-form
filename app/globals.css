@@ -25,11 +25,11 @@
   top: 0;
   left: 0;
   pointer-events: none;
-  background-image: url('/bg-2.png');
+  background-image: url('/bg-3.png');
   background-position: center;
   background-size: cover;
   background-color: #000;
-  background-blend-mode: exclusion;
+  /* background-blend-mode: hard-light; */
 }
 
 .enter-gate{
@@ -98,7 +98,6 @@
   top: 0;
   width: 100%;
   z-index: 9999;
-  background: black;
   left: 0;
 }
 .headliner .headline-wrap{
@@ -138,9 +137,31 @@
 .bentos .right{
   flex: 1 0 58%;
 }
-.bentos .right-50,
-.bentos .left-50{
-  flex: 1 0 50%;
+.bentos .right-half,
+.bentos .left-half{
+  flex: 0 1 50%;
+  max-width: 50%;
+}
+.bentos .right-half p,
+.bentos .left-half p{
+  margin-bottom: 20px;
+}
+
+.carousel .carousel-item p{
+  font-size: 25px;
+  line-height: 120%;
+  font-weight: 400;
+}
+.carousel .carousel-item p.auth{
+  width: 100%;
+  text-align: right;
+  color: #EC1E1E;
+}
+.carousel .carousel-item p.auth:before{
+  content: "- ";
+  display: inline-block;
+  margin-right: 10px;
+  color: white;
 }
 
 .handjet{
@@ -178,6 +199,7 @@
   color: #fff;
   line-height: 120%;
   font-size: 28px;
+  margin-bottom: 1em;
 }
 .dj-booth p{
   font-size: 19px;
@@ -186,7 +208,9 @@
   font-size: 32px;
   color: #fff;
 }
-
+.carousel .carousel-item{
+  color: white;
+}
 
 .stories p{
   margin-bottom: 1em;
