@@ -7,7 +7,7 @@ import CRTScreen from "@/components/crt-effect"
 
 export const metadata: Metadata = {
   title: "66.6FM Horror Hotline",
-  description: "Share your worst data horror story for a chance to win prizes, including tickets to NYC Advertising Week.",
+  description: "Demandbase presents 66.6FM Live. Tune into Data Horror Stories and share your own as B2B marketers confront the nightmares that keep coming back.",
 }
 
 export default function RootLayout({

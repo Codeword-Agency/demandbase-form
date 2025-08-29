@@ -176,7 +176,7 @@ export default function ContactForm() {
               <div className="stories-scroll">
                 <h1>Tonight's Show</h1>
               <h2>Data Horror Stories</h2>
-              <p>Bad data never sleeps. Neither will you. These aren’t ghost stories from summer camp. These are real-life stories of when bad data caused chaos: campaigns that failed, forecasts that collapsed, signals that went nowhere. Everyone has one of these stories, and we’re giving them a place to tell it. Call in. Rage out.</p> 
+              <p>Bad data never sleeps. Neither will you. These aren’t ghost stories from summer camp. These are real-life stories of when bad data caused chaos: campaigns that failed, forecasts that collapsed, signals that went nowhere. Everyone has one of these stories, and we’re giving you a place to tell it. Call in. Rage out.</p> 
               </div>
             </div>
           </div>
@@ -186,7 +186,7 @@ export default function ContactForm() {
       <div className="w-full forms handjet">
           <CardTitle className="title">Caller, you're next</CardTitle>
           <CardDescription className="description">
-            <p>Not every nightmare happens at night. Some happen in dashboards. Some bleed into forecasts. Some poison entire campaigns. Every GTM leader has a data horror story.</p>
+            <p>Not every nightmare happens at night. Some happen in dashboards. Some bleed into forecasts. Some poison entire campaigns. Every marketer has a data horror story. Tell us yours:</p>
           <p>Tell us your worst data horror story for a chance to win prizes, including tickets to NYC Advertising Week.</p>
           </CardDescription>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -316,7 +316,7 @@ export default function ContactForm() {
           </div>
 
           <div className="main-logo">
-            <p>Brought to you by</p>
+            <p>Conjured by</p>
             <p><a href="https://www.demandbase.com/" target="_blank"><img src="/socials/demandbase_full_neon.png" /></a></p>
           </div>
         </div>

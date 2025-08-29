@@ -398,6 +398,7 @@
   box-shadow: 4px 4px 0 0 #861111 inset;
   border: none;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .forms .button button{
