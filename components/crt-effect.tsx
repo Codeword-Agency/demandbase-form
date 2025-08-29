@@ -294,7 +294,8 @@ export default function CRTOverlay() {
   const screenRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!screenRef.current && window.innerWidth < 600) return
+    if (!screenRef.current) return
+    if(window.innerWidth < 600) return
 
     const screen = new ScreenEffect(screenRef.current, {})
 
