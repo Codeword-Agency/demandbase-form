@@ -830,7 +830,8 @@
   .forms{
     margin-bottom: 0;
   }
-  .forms .button, .forms .voice{
+  .forms .button, .forms .voice,
+  .forms .button button, .forms .voice button{
     width: 100%;
   }
   .tune-in{
