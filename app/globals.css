@@ -828,6 +828,9 @@
   .forms .title{
     line-height: 100%;
   }
+  .headliner{
+    margin-bottom: 0;
+  }
   .headliner .headline-wrap{
     flex-direction: column;
   }
