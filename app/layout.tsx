@@ -16,7 +16,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       <meta property="og:image" content="/socials/og-share.png" />
       <meta property="og:image:alt" content="66.6FM Horror Hotline" />
       <meta property="og:image:type" content="image/png" />
@@ -28,6 +29,7 @@ export default function RootLayout({
       <meta name="twitter:image:type" content="image/png" />
       <meta name="twitter:image:width" content="1200" />
       <meta name="twitter:image:height" content="628" />
+      </head>
       <body>
         <CRTScreen />
         {children}
