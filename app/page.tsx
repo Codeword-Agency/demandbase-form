@@ -93,11 +93,8 @@ export default function ContactForm() {
   }
 
   const handleSent = () => {
-    console.log("fire");
     let sendGate = document.querySelector('.sent-gate');
-    if(sendGate?.classList.contains('entered') ){
-      sendGate?.classList.remove('entered')
-    }
+    sendGate?.classList.toggle('entered');
   }
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
