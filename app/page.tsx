@@ -144,7 +144,7 @@ export default function ContactForm() {
         <path d="M28.6936 9.38965L9.9494 28.1338" stroke="white" strokeWidth="2" stroke-lincap="round" strokeLinejoin="round" />
         </svg>
       </div>
-        <h1>You hit send. You can't take it back</h1>
+        <h1>You hit send. You can't take it back.</h1>
         <p>Confessions can be costly.</p>
         <p>But in this broadcast, they might be rewarded.</p>
       </div>
