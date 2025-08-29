@@ -12,7 +12,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 9999;
+  z-index: 1001;
   top: 0; 
   left: 0;
   pointer-events: none ;
@@ -31,7 +31,9 @@
   background-color: #000;
   background-blend-mode: hard-light;
 }
-
+.the-filter{
+  z-index: 1002;
+}
 .enter-gate,
 .sent-gate{
   display: flex;
@@ -43,7 +45,7 @@
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 9999999999999;
+  z-index: 1000;
   background-color: #000;
 }
 .enter-gate .enter-wrap{
