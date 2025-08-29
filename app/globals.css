@@ -840,4 +840,11 @@
     flex: 0 0 100%;
     max-width: 100%;
   }
+  .socials .socials-wrap{
+    flex-direction: column;
+    gap: 25px;
+  }
+  .socials .socials-wrap a{
+    width: 50%;
+  }
 }
