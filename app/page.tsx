@@ -252,7 +252,7 @@ export default function ContactForm() {
                 disabled={isSubmitting}
               ><CornerDownRight />
                 {isSuccess ? handleSent() : ""}
-                {isSubmitting ? "Submitting..." : isSuccess ? "Sent" : "Share your story"}
+                {isSubmitting ? "Submitting..." : isSuccess ? "Sent" : "Share your nightmare"}
               </Button>
               </div>
             </div>
