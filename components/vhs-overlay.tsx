@@ -46,11 +46,13 @@ export default function VHSOverlay() {
       }, interval)
     }
 
+    if(window.innerWidth < 600){
     setInterval(() => {
       var starting = Math.random() * 200;
       var otherStart = Math.random() * 200;
       setBaseFreq(otherStart+" "+starting);
       }, 100);
+    }
 
 
       

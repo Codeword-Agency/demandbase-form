@@ -443,6 +443,7 @@
 .socials .main-logo img{
   margin: 0 auto;
   width: 30%;
+  min-width: 250px;
 }
 
 /* exciting things are happening */
