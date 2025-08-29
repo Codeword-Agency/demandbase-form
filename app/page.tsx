@@ -115,7 +115,7 @@ export default function ContactForm() {
 
     {/* enter gate */}
     <div className="enter-gate">
-      <video autoPlay loop muted preload="auto" id="enterGate">
+      <video autoPlay loop muted playsInline preload="auto" id="enterGate">
         <source src="/video/gate.mp4" type="video/mp4" />
       </video>
       <div className="enter-wrap">
@@ -265,7 +265,7 @@ export default function ContactForm() {
               <h1>Live studio Feed</h1>
               <p>Watch the horror unfold</p> 
               <p>in real time.</p>
-              <video autoPlay loop muted preload="auto" id="studioFeed">
+              <video autoPlay loop muted playsInline preload="auto" id="studioFeed">
                 <source src="/video/feed.mp4" type="video/mp4" />
               </video>
             </div>
