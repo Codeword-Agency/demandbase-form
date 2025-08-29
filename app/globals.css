@@ -814,11 +814,30 @@
   .bentos{
     flex-direction: column;
   }
-  .bentos .left{
-    gap: 70px;
-    margin-bottom: 40px;
+  .outliner,
+  .forms{
+    padding: 35px 4vw 0px;
   }
   .forms .input{
     flex: 0 0 100%;
+  }
+  .headliner .headline-wrap{
+    flex-direction: column;
+  }
+  .headliner img{
+    width: 100%;
+  }
+  .forms{
+    margin-bottom: 0;
+  }
+  .forms .button, .forms .voice{
+    width: 100%;
+  }
+  .tune-in{
+    display: none;
+  }
+  .bentos .left-half, .bentos .right-half{
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
