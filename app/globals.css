@@ -408,7 +408,7 @@
   line-height: 1;
   background-color: #EC1E1E;
   color:white;
-  padding:15px 20px;
+  padding:15px 20px 10px;
   height: auto;
   font-weight: 400;
   box-shadow: 4px 4px 0 0 #861111 inset;
@@ -424,13 +424,14 @@
 
 .socials .socials-wrap{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 30px;
   align-items: center;
   margin-bottom: 40px;
 }
 
 .socials .socials-wrap a{
-  flex: 0 0 20%;
+  flex: 0 0 15%;
 }
 .socials .main-logo{
   text-align: center;
@@ -439,7 +440,8 @@
   line-height: 120%;
 }
 .socials .main-logo img{
-  margin: 0 auto
+  margin: 0 auto;
+  width: 30%;
 }
 
 /* exciting things are happening */

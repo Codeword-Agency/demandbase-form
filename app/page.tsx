@@ -121,7 +121,7 @@ export default function ContactForm() {
       <div className="enter-wrap">
         <img src="/LOGO-NEW.svg" />
         <p>Haunted by bad data?</p>
-        <p>Tell us your horror story</p>
+        <p>Tell us your horror story.</p>
         <Button
           type="enter"
           className={`enter`}
@@ -144,8 +144,8 @@ export default function ContactForm() {
         <path d="M28.6936 9.38965L9.9494 28.1338" stroke="white" strokeWidth="2" stroke-lincap="round" strokeLinejoin="round" />
         </svg>
       </div>
-        <h1>Your hit send. You can't take it back</h1>
-        <p>Confessions can be costly</p>
+        <h1>You hit send. You can't take it back</h1>
+        <p>Confessions can be costly.</p>
         <p>But in this broadcast, they might be rewarded.</p>
       </div>
     </div>
@@ -168,7 +168,8 @@ export default function ContactForm() {
             <div className="outliner white dj-booth">
               <h1>Tonight's DJ</h1>
               <div className="data-dread"></div>
-              <p>Everyone talks about data wins. Data Dread is only interested in talking about the losses. Call in to your favorite on-air exorcist to talk about all things static, panic, and bad data.</p>
+              <p>Everyone talks about data wins.</p> 
+              <p>Data Dread is only interested in talking about the losses. Call in to your favorite on-air exorcist to talk about all things static, panic, and bad data.</p>
             </div>
           </div>
           <div className="right">
@@ -187,7 +188,7 @@ export default function ContactForm() {
           <CardTitle className="title">Caller, you're next</CardTitle>
           <CardDescription className="description">
             <p>Not every nightmare happens at night. Some happen in dashboards. Some bleed into forecasts. Some poison entire campaigns. Every marketer has a data horror story. Tell us yours:</p>
-          <p>Tell us your worst data horror story for a chance to win prizes, including tickets to NYC Advertising Week.</p>
+          <p>Share your worst data horror story for a chance to win prizes, including tickets to NYC Advertising Week.</p>
           </CardDescription>
           <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -262,7 +263,8 @@ export default function ContactForm() {
           <div className="left-half">
             <div className="outliner">
               <h1>Live studio Feed</h1>
-              <p>Watch the horror unfold in real time.</p>
+              <p>Watch the horror unfold</p> 
+              <p>in real time.</p>
               <video autoPlay loop muted preload="auto" id="studioFeed">
                 <source src="/video/feed.mp4" type="video/mp4" />
               </video>
@@ -298,13 +300,6 @@ export default function ContactForm() {
 
         <div className="socials">
           <div className="socials-wrap">
-            <a href="https://www.demandbase.com/" target="_blank">
-            <img src="/socials/website-button.png" />
-            </a>
-
-            <a href="https://x.com/Demandbase/" target="_blank">
-            <img src="/socials/x-button.png" />
-            </a>
 
              <a href="https://www.linkedin.com/company/demandbase/" target="_blank">
             <img src="/socials/linkedin-button.png" />
