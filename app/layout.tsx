@@ -30,6 +30,15 @@ export default function RootLayout({
       <meta name="twitter:image:width" content="1200" />
       <meta name="twitter:image:height" content="628" />
       </head>
+      <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YZM91Z07CT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YZM91Z07CT');
+</script>
       <body>
         <CRTScreen />
         {children}
