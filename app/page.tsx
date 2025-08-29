@@ -92,6 +92,13 @@ export default function ContactForm() {
     }
   }
 
+  const handleSent = () => {
+    console.log("fire");
+    let sendGate = document.querySelector('.sent-gate');
+    if(sendGate?.classList.contains('entered') ){
+      sendGate?.classList.remove('entered')
+    }
+  }
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormValues((prev) => ({ ...prev, [name]: value }))
@@ -109,6 +116,7 @@ export default function ContactForm() {
     <>
     <div className="fw"></div>
 
+    {/* enter gate */}
     <div className="enter-gate">
       <video autoPlay loop muted preload="auto" id="enterGate">
         <source src="/video/gate.mp4" type="video/mp4" />
@@ -123,6 +131,25 @@ export default function ContactForm() {
           onClick={ () => {document.querySelector('.enter-gate')?.classList.add('entered')}}
         > Enter
         </Button>
+      </div>
+    </div>
+
+    {/* messge sent */}
+    <div className="sent-gate entered">
+      <video autoPlay loop muted preload="auto" id="enterGate">
+        <source src="/video/accepted.mp4" type="video/mp4" />
+      </video>
+      
+      <div className="sent-wrap">
+        <div className="ex" onClick={handleSent}>
+        <svg xmlns='https://www.w3.org/200/svg' width="39" height="38" viewBox="0 0 39 38" fill="none">
+        <path d="M9.94946 9.39746L28.6937 28.1417" stroke="white" strokeWidth="2" stroke-lincap="round" strokeLinejoin="round" />
+        <path d="M28.6936 9.38965L9.9494 28.1338" stroke="white" strokeWidth="2" stroke-lincap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+        <h1>Your hit send. You can't take it back</h1>
+        <p>Confessions can be costly</p>
+        <p>But in this broadcast, they might be rewarded.</p>
       </div>
     </div>
 
@@ -227,6 +254,7 @@ export default function ContactForm() {
                 className={`w-full  ${isSuccess ? "bg-green-600 hover:bg-green-700" : ""}`}
                 disabled={isSubmitting}
               ><CornerDownRight />
+                {isSuccess ? handleSent() : ""}
                 {isSubmitting ? "Submitting..." : isSuccess ? "Sent" : "Share your story"}
               </Button>
               </div>

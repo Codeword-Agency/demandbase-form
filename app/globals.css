@@ -32,7 +32,8 @@
   background-blend-mode: hard-light;
 }
 
-.enter-gate{
+.enter-gate,
+.sent-gate{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,12 +55,41 @@
   padding:73px 14vw 52px;
   font-family: "Aldrich", sans-serif;
 }
-.enter-gate p{
+.sent-gate .sent-wrap{
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  padding:45px 65px;
+  font-family: "Aldrich", sans-serif;
+  width: 80%;
+  position: relative;
+}
+.sent-gate .sent-wrap .ex{
+  position: absolute;
+  right: 25px;
+  top: 30px;
+  cursor: pointer;
+}
+.enter-gate p,
+.sent-gate p{
   color: #fff;
   font-size: 25px;
   line-height: 120%;
   font-weight: 400;
   text-align: center;
+}
+.sent-gate .sent-wrap p{
+  text-align: left;
+}
+.sent-gate .sent-wrap h1{
+  font-family: "Chelsea Market", system-ui;
+  color:#Ec1E1E;
+  text-shadow: 0 0 5.8px #Ec1E1E;
+  font-size: 32px;
+  line-height: 80%;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 .enter-gate button{
   background-color: #Ec1E1E;
@@ -73,14 +103,16 @@
   cursor: pointer;
   padding: 20px 30px 13px;
 }
-.enter-gate video{
+.enter-gate video,
+.sent-gate video{
   position: absolute;
   width: 100vw;
   height: 100vh;
   z-index: -1;
   object-fit: cover;
 }
-.enter-gate.entered{
+.enter-gate.entered,
+.sent-gate.entered{
   opacity: 0;
   transition: opacity 1.3s ease-in-out;
   pointer-events: none;;
