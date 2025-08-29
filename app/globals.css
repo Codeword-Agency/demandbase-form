@@ -821,6 +821,9 @@
   .forms .input{
     flex: 0 0 100%;
   }
+  .forms .title{
+    line-height: 100%;
+  }
   .headliner .headline-wrap{
     flex-direction: column;
   }
