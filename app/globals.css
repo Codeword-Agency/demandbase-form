@@ -859,9 +859,12 @@
   .socials .socials-wrap a{
     width: 50%;
   }
-  .enter-gate .enter-wrap{
+  .enter-gate .enter-wrap,
+  .send-gate .sent-wrap{
     width: 90vw;
     height: 80vh;
     padding: 73px 4vw 52px;
+    display: flex;
+    justify-content: center;
   }
 }
