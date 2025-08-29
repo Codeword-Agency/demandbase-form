@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import Script from 'next/script'
 import VHSOverlay from "@/components/vhs-overlay"
 import CRTScreen from "@/components/crt-effect"
 
@@ -30,7 +31,16 @@ export default function RootLayout({
       <meta name="twitter:image:width" content="1200" />
       <meta name="twitter:image:height" content="628" />
       </head>
-      
+<Script async src="https://www.googletagmanager.com/gtag/js?id=G-YZM91Z07CT"></Script>
+<Script id="google-analytics">
+  {`
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YZM91Z07CT');
+  `}
+</Script>
       <body>
         <CRTScreen />
         {children}
