@@ -809,14 +809,14 @@
 
 @media screen and (max-width:600px){
   .container{
-    width: 95%;
+    width: 100%;
   }
   .bentos{
     flex-direction: column;
   }
   .outliner,
   .forms{
-    padding: 35px 4vw 0px;
+    padding: 35px 2vw 0px;
   }
   .forms .input{
     flex: 0 0 100%;
