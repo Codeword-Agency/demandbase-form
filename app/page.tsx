@@ -2,7 +2,7 @@
 
 import type React from "react"
 import VoiceRecorder from "@/components/voice-recorder"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label"
 import { CardDescription, CardTitle } from "@/components/ui/card"
 import Carousel, { CarouselItem } from "@/components/ui/carousel"
 import { CornerDownRight } from "lucide-react"
+import VHSOverlay from "@/components/vhs-overlay"
+import CRTScreen from "@/components/crt-effect"
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -111,6 +113,7 @@ export default function ContactForm() {
 
   return (
     <>
+    <CRTScreen />
     <div className="fw"></div>
 
     {/* enter gate */}
@@ -263,8 +266,7 @@ export default function ContactForm() {
           <div className="left-half">
             <div className="outliner">
               <h1>Live studio Feed</h1>
-              <p>Watch the horror unfold</p> 
-              <p>in real time.</p>
+              <p>Watch the horror unfold in real time.</p> 
               <video autoPlay loop muted playsInline preload="auto" id="studioFeed">
                 <source src="/video/feed.mp4" type="video/mp4" />
               </video>
@@ -320,6 +322,7 @@ export default function ContactForm() {
       </div>
     </div>
     <div className="bg"></div>
+        <VHSOverlay />
     </>
   )
 }

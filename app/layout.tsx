@@ -2,13 +2,12 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import Script from 'next/script'
-import VHSOverlay from "@/components/vhs-overlay"
-import CRTScreen from "@/components/crt-effect"
 
 export const metadata: Metadata = {
   title: "66.6FM Horror Hotline",
   description: "Demandbase presents 66.6FM Live. Tune into Data Horror Stories and share your own as B2B marketers confront the nightmares that keep coming back.",
 }
+
 
 export default function RootLayout({
   children,
@@ -42,9 +41,7 @@ export default function RootLayout({
   `}
 </Script>
       <body>
-        <CRTScreen />
         {children}
-        <VHSOverlay />
       </body>
     </html>
   )

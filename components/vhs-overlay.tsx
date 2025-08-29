@@ -8,6 +8,9 @@ export default function VHSOverlay() {
   const [baseFreq, setBaseFreq] = useState("0.004 0.2") ;
 
   useEffect(() => {
+    
+    if(window.innerWidth > 600 ){
+      console.log("pig blood");
     const triggerDisplacementDistortion = () => {
       // Duration of displacement distortion (500ms to 1.5s)
       const duration = Math.random() * 1000 + 500
@@ -29,7 +32,7 @@ export default function VHSOverlay() {
       // Randomly spike the scale from 20 to 200 for brief moments
       const spikeScale = Math.random() * 180 + 20 // 20-200 range
       setTurbulenceScale(spikeScale)
-      document.querySelector('.site-bg').classList.toggle('spooky')
+      document.querySelector('.site-bg')?.classList.toggle('spooky')
       // Return to normal after 50-150ms
       const spikeDuration = Math.random() * 100 + 50
       setTimeout(() => {
@@ -46,19 +49,25 @@ export default function VHSOverlay() {
       }, interval)
     }
 
-    if(window.innerWidth < 600){
+
     setInterval(() => {
       var starting = Math.random() * 200;
       var otherStart = Math.random() * 200;
       setBaseFreq(otherStart+" "+starting);
       }, 100);
-    }
+
 
 
       
 
     scheduleNext()
     scheduleRandomTurbulence()
+    }else{
+      setInterval(() => {
+      document.querySelector('.site-bg')?.classList.toggle('spooky')
+      }, 5200);
+      
+    }
   }, [])
 
   return (
@@ -166,6 +175,7 @@ export default function VHSOverlay() {
           </filter>
         </defs>
       </svg>
+
 
       <style jsx global>{`
         .site-bg {

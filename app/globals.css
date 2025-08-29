@@ -183,6 +183,7 @@
 .bentos .right-half p,
 .bentos .left-half p{
   margin-bottom: 20px;
+  font-size: 25px;
 }
 
 .carousel .carousel-item p{
@@ -393,7 +394,7 @@
   line-height: 1;
   background-color: #ff7c33;
   color:white;
-  padding:15px 20px;
+  padding:15px 20px 10px;
   height: auto;
   font-weight: 400;
   box-shadow: 4px 4px 0 0 #861111 inset;
@@ -857,5 +858,10 @@
   }
   .socials .socials-wrap a{
     width: 50%;
+  }
+  .enter-gate .enter-wrap{
+    width: 90vw;
+    height: 80vh;
+    padding: 73px 4vw 52px;
   }
 }
