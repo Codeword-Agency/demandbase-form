@@ -220,7 +220,7 @@ export default function ContactForm() {
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Your horror story..."
+                placeholder="Confess here"
                 required
                 rows={4}
                 value={formValues.message}
@@ -271,7 +271,7 @@ export default function ContactForm() {
           <div className="right-half">
             <div className="outliner">
               <h1>Past Callers <span className="  ">(RIP)</span></h1>
-              <p>Few live to tell the tale...</p>
+              <p>Only survivors tell their story…</p>
                <Carousel>
               <CarouselItem>
                 <div className="leaky-lead-linda"></div>
