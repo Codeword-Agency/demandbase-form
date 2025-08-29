@@ -317,7 +317,7 @@ export default function ContactForm() {
 
           <div className="main-logo">
             <p>Brought to you by</p>
-            <p><img src="/socials/demandbase_full_neon.png" /></p>
+            <p><a href="https://www.demandbase.com/" target="_blank"><img src="/socials/demandbase_full_neon.png" /></a></p>
           </div>
         </div>
 
