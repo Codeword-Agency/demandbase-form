@@ -166,12 +166,12 @@ export default function VHSOverlay() {
       </svg>
 
       <style jsx global>{`
-        .fw {
+        .site-bg {
           filter: url(#vhs-base);
           transition: filter 0.1s ease-out;
         }
         
-        .fw.displacement-active {
+        .site-bg.displacement-active {
           filter: url(#vhs-base) url(#displacement-distortion);
         }
         
