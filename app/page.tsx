@@ -93,6 +93,7 @@ export default function ContactForm() {
       setIsSubmitting(false)
     }
   }
+  
 
   const handleSent = () => {
     let sendGate = document.querySelector('.sent-gate');

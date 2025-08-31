@@ -10,7 +10,6 @@ export default function VHSOverlay() {
   useEffect(() => {
     
     if(window.innerWidth > 600 ){
-      console.log("pig blood");
     const triggerDisplacementDistortion = () => {
       // Duration of displacement distortion (500ms to 1.5s)
       const duration = Math.random() * 1000 + 500
