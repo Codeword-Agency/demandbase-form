@@ -18,12 +18,16 @@ export default function RootLayout({
     <html lang="en">
       <head>
       <link rel="icon" type="image/png" href="/socials/favicon.png" />
+      <meta property="og:title" content="66.6FM Horror Hotline" />
+      <meta property="og:description" content="Demandbase presents 66.6FM Live. Tune into Data Horror Stories and share your own as B2B marketers confront the nightmares that keep coming back." />
       <meta property="og:image" content="/socials/og-share.png" />
       <meta property="og:image:alt" content="66.6FM Horror Hotline" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="628" />
 
+     <meta name="twitter:title" content="66.6FM Horror Hotline" />
+      <meta name="twitter:description" content="Demandbase presents 66.6FM Live. Tune into Data Horror Stories and share your own as B2B marketers confront the nightmares that keep coming back." />
       <meta name="twitter:image" content="/socials/og-share.png" />
       <meta name="twitter:image:alt" content="66.6FM Horror Hotline" />
       <meta name="twitter:image:type" content="image/png" />
