@@ -26,7 +26,8 @@ export default function RootLayout({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="628" />
 
-     <meta name="twitter:title" content="66.6FM Horror Hotline" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="66.6FM Horror Hotline" />
       <meta name="twitter:description" content="Demandbase presents 66.6FM Live. Tune into Data Horror Stories and share your own as B2B marketers confront the nightmares that keep coming back." />
       <meta name="twitter:image" content="/socials/og-share.png" />
       <meta name="twitter:image:alt" content="66.6FM Horror Hotline" />
