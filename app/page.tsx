@@ -263,41 +263,56 @@ export default function ContactForm() {
             </div>
           </form>
       </div>
-        <div className="bentos">
-          <div className="left-half">
-            <div className="outliner">
-              <h1>Live studio Feed</h1>
-              <p>Watch the horror unfold in real time.</p> 
-              <video autoPlay loop muted playsInline preload="auto" id="studioFeed">
-                <source src="/video/feed.mp4" type="video/mp4" />
-              </video>
+        <div className="stacked">
+          <div className="outliner">
+            <div className="bentos">
+              <div className="left-half">
+                <h1>Live studio Feed</h1>
+                <p>Watch the horror unfold in real time.</p> 
+              </div>
+              <div className="right-half">
+                <video autoPlay loop muted playsInline preload="auto" id="studioFeed">
+                  <source src="/video/feed.mp4" type="video/mp4" />
+                </video>
+              </div>
             </div>
           </div>
-          <div className="right-half">
-            <div className="outliner">
-              <h1>Past Callers <span className="  ">(RIP)</span></h1>
-              <p>Only survivors tell their story…</p>
-               <Carousel>
-              <CarouselItem>
-                <div className="leaky-lead-linda"></div>
-                    <p>“Our CRM wasn't a database; it was a graveyard full of ghost leads and dead-end accounts. My job was to haunt it, looking for a sign of life.”</p>
-                    <p className="auth">Leaky-Lead Linda</p>
-              </CarouselItem>
+            <div className="outliner flex">
+                <div className="text-box">
+                  <h1>Past Callers <span className="">(RIP)</span></h1>
+                  <p>Only survivors tell their story…</p>
+              </div>
+                  <Carousel>
+                    <CarouselItem>
+                      <div className="left">
+                        <p>“Our CRM wasn't a database; it was a graveyard full of ghost leads and dead-end accounts. My job was to haunt it, looking for a sign of life.”</p>
+                          <p className="auth">Leaky-Lead Linda</p>
+                      </div>
+                      <div className="right">
+                        <div className="leaky-lead-linda"></div>
+                      </div>
+                    </CarouselItem>
 
-              <CarouselItem>
-                <div className="failed-ad-frank"></div>
-                    <p>“They asked why the campaign failed. I knew the answer. I’d trusted dirty data, and it betrayed me in front of everyone.”</p>
-                    <p className="auth">Failed-Ad Frank</p>
-              </CarouselItem>
+                    <CarouselItem>
+                      <div className="left">
+                        <p>“They asked why the campaign failed. I knew the answer. I’d trusted dirty data, and it betrayed me in front of everyone.”</p>
+                          <p className="auth">Failed-Ad Frank</p>
+                      </div>
+                      <div className="right">
+                        <div className="failed-ad-frank"></div>
+                      </div>
+                    </CarouselItem>
 
-              <CarouselItem>
-                <div className="no-click-nick"></div>
-                    <p>“The sales team said my leads were garbage. I checked the source: a three-year-old spreadsheet I found on a shared drive. I didn't generate leads—I disturbed a tomb.”</p>
-                    <p className="auth">No-Click Nick</p>
-              </CarouselItem>
-              
-            </Carousel>
-            </div>
+                    <CarouselItem>
+                      <div className="left">
+                        <p>“The sales team said my leads were garbage. I checked the source: a three-year-old spreadsheet I found on a shared drive. I didn't generate leads—I disturbed a tomb.”</p>
+                          <p className="auth">No-Click Nick</p>
+                      </div>
+                      <div className="right">
+                        <div className="no-click-nick"></div>
+                      </div>
+                    </CarouselItem>
+                  </Carousel>
           </div>
         </div>
 

@@ -111,7 +111,7 @@ export default function Carousel({ children }: CarouselProps) {
       {/* Carousel Content */}
       <div
         ref={carouselRef}
-        className="relative overflow-hidden rounded-lg mb-6 cursor-grab active:cursor-grabbing select-none"
+        className="relative overflow-x-hidden overflow-y-visible rounded-lg mb-6 cursor-grab active:cursor-grabbing select-none"
         onMouseDown={handleMouseDown}
         onMouseMove={isDragging ? handleMouseMove : undefined}
         onMouseUp={handleMouseUp}

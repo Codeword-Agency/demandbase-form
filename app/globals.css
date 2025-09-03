@@ -162,6 +162,9 @@
   margin-top: 55px;
   margin-bottom: 30px;
 }
+.stacked{
+  flex-direction: column;
+}
 .bentos .left{
   flex: 0 0 38%;
   display: flex;
@@ -174,8 +177,8 @@
 .bentos .right{
   flex: 1 0 58%;
 }
-.bentos .right-half,
-.bentos .left-half{
+.stacked .right-half,
+.stacked .left-half{
   flex: 0 1 50%;
   max-width: 50%;
 }
@@ -185,6 +188,20 @@
   font-size: 25px;
 }
 
+.carousel .carousel-item{
+  color: white;
+  display: flex;
+  gap: 30px;
+}
+
+.carousel .carousel-item .left,
+.carousel .carousel-item .right{
+  flex: 0 1 50%;
+}
+.carousel .carousel-item .left{
+  margin-top: 90px;
+}
+
 .carousel .carousel-item p{
   font-size: 25px;
   line-height: 120%;
@@ -192,7 +209,6 @@
 }
 .carousel .carousel-item p.auth{
   width: 100%;
-  text-align: right;
   color: #EC1E1E;
 }
 .carousel .carousel-item p.auth:before{
@@ -201,14 +217,19 @@
   margin-right: 10px;
   color: white;
 }
-
 .carousel button{
   cursor: pointer;
 }
-
 .carousel button.active{
   background-color: #EC1E1E !important;
   border:none;
+}
+.outliner.flex{
+  display: flex;
+}
+.outliner.flex .text-box{
+  max-width: calc(50% - 15px);
+  margin-bottom: -90px;
 }
 
 .handjet{
@@ -261,9 +282,7 @@
   font-size: 32px;
   color: #fff;
 }
-.carousel .carousel-item{
-  color: white;
-}
+
 
 .stories p{
   margin-bottom: 1em;
