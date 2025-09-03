@@ -130,7 +130,7 @@ export default function VoiceRecorder({ onRecordingComplete, onRecordingDelete }
             className="flex items-center gap-2 bg-transparent"
           >
             <Mic className="w-4 h-4" />
-            Tell your story
+            Record your story
           </Button>
         )}
 

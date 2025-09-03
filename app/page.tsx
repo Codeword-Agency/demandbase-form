@@ -124,13 +124,13 @@ export default function ContactForm() {
       </video>
       <div className="enter-wrap">
         <img src="/LOGO-NEW.svg" />
-        <p>Haunted by bad data?</p>
-        <p>Tell us your horror story.</p>
+        <p>The light flickers. The mic hums.</p>
+        <p>You’re on the air.</p>
         <Button
           type="enter"
           className={`enter`}
           onClick={ () => {document.querySelector('.enter-gate')?.classList.add('entered')}}
-        > Enter
+        > Confess
         </Button>
       </div>
     </div>
@@ -148,7 +148,7 @@ export default function ContactForm() {
         <path d="M28.6936 9.38965L9.9494 28.1338" stroke="white" strokeWidth="2" stroke-lincap="round" strokeLinejoin="round" />
         </svg>
       </div>
-        <h1>You hit send. You can't take it back.</h1>
+        <h1>The broadcast is pleased. You’ve fed it. For now.</h1>
         <p>Confessions can be costly.</p>
         <p>But in this broadcast, they might be rewarded.</p>
       </div>
@@ -170,10 +170,9 @@ export default function ContactForm() {
         <div className="bentos">
           <div className="left">
             <div className="outliner white dj-booth">
-              <h1>Tonight's DJ</h1>
+              <h1>Tonight's DJ: Data Dread</h1>
               <div className="data-dread"></div>
-              <p>Everyone talks about data wins.</p> 
-              <p>Data Dread is only interested in talking about the losses. Call in to your favorite on-air exorcist to talk about all things static, panic, and bad data.</p>
+              <p>Data Dread lives for your disasters. Every failure keeps him on air, every story of collapse gives him another breath. Nothing excites him more than hearing how it all went wrong. Your downfall is his favorite song.</p>
             </div>
           </div>
           <div className="right">
@@ -181,7 +180,7 @@ export default function ContactForm() {
               <div className="stories-scroll">
                 <h1>Tonight's Show</h1>
               <h2>Data Horror Stories</h2>
-              <p>Bad data never sleeps. Neither will you. These aren’t ghost stories from summer camp. These are real-life stories of when bad data caused chaos: campaigns that failed, forecasts that collapsed, signals that went nowhere. Everyone has one of these stories, and we’re giving you a place to tell it. Call in. Rage out.</p> 
+              <p>Some stories don’t fade. They stain. They rot. They claw their way back. The caller before you talked about the pipeline that vanished. Another spoke of dead leads. Now, the static clears. It is your line. Confess, caller. Tell us about the data that traumatized you.</p> 
               </div>
             </div>
           </div>
@@ -191,8 +190,9 @@ export default function ContactForm() {
       <div className="w-full forms handjet">
           <CardTitle className="title">Caller, you're next</CardTitle>
           <CardDescription className="description">
-            <p>Not every nightmare happens at night. Some happen in dashboards. Some bleed into forecasts. Some poison entire campaigns. Every marketer has a data horror story. Tell us yours:</p>
-          <p>Share your worst data horror story for a chance to win prizes, including tickets to NYC Advertising Week.</p>
+            <p>The station is empty. Static crackles in your ears. In the dark, a voice whispers, <i>Tell us the story. The one you swore you’d never repeat.</i></p>
+            <p>It always begins the same way. An account list. A promising signal. And then the collapse.</p>
+            <p>Confess, and your life may be spared. You may also be rewarded with a ticket to NYC Advertising Week from October 6-9, 2025.</p>
           </CardDescription>
           <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -225,7 +225,7 @@ export default function ContactForm() {
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Confess here"
+                placeholder="Type your story"
                 required
                 rows={4}
                 value={formValues.message}
@@ -280,12 +280,12 @@ export default function ContactForm() {
             <div className="outliner flex">
                 <div className="text-box">
                   <h1>Past Callers <span className="">(RIP)</span></h1>
-                  <p>Only survivors tell their story…</p>
+                  <p>These are not mistakes. These are the horrors that feed on broken data:</p>
               </div>
                   <Carousel>
                     <CarouselItem>
                       <div className="left">
-                        <p>“Our CRM wasn't a database; it was a graveyard full of ghost leads and dead-end accounts. My job was to haunt it, looking for a sign of life.”</p>
+                        <p>“The forecast bled out overnight, its carcass still on the dashboard. The campaign was so cursed it poisoned every deal it touched.”</p>
                           <p className="auth">Leaky-Lead Linda</p>
                       </div>
                       <div className="right">
@@ -295,7 +295,7 @@ export default function ContactForm() {
 
                     <CarouselItem>
                       <div className="left">
-                        <p>“They asked why the campaign failed. I knew the answer. I’d trusted dirty data, and it betrayed me in front of everyone.”</p>
+                        <p>“They asked why the campaign failed. Attribution said the new channel was working, but none of the leads were real. They stalk me still, whispering lies long after the quarter’s close.”</p>
                           <p className="auth">Failed-Ad Frank</p>
                       </div>
                       <div className="right">
@@ -305,7 +305,7 @@ export default function ContactForm() {
 
                     <CarouselItem>
                       <div className="left">
-                        <p>“The sales team said my leads were garbage. I checked the source: a three-year-old spreadsheet I found on a shared drive. I didn't generate leads—I disturbed a tomb.”</p>
+                        <p>“The sales and marketing teams turned feral, tearing at each other in the dark. I found the rot: Outdated CRM records that hemorrhaged into every spreadsheet. These are the parasites that infect once-promising organizations.”</p>
                           <p className="auth">No-Click Nick</p>
                       </div>
                       <div className="right">
