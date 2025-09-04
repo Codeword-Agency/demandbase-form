@@ -125,7 +125,8 @@ export default function ContactForm() {
       <div className="enter-wrap">
         <img src="/LOGO-NEW.svg" />
         <div className="wrap-sec">
-        <p>The light flickers. The mic hums.</p>
+        <p>The light flickers.</p> 
+        <p>The mic hums.</p>
         <p>You’re on the air.</p>
         </div>
         <Button
