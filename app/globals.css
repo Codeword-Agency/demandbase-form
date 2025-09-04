@@ -896,6 +896,7 @@
   }
   .carousel .carousel-item .left{
     margin-top: 0;
+    height: auto;
   }
   .carousel .carousel-item .right {
     aspect-ratio: 1;
@@ -903,5 +904,8 @@
   }
   .enter-wrap p{
     display: inline;
+  }
+  .carousel{
+    margin-bottom: 35px;
   }
 }
