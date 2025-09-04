@@ -903,8 +903,8 @@
   }
   .carousel .carousel-item{
     flex-direction: column-reverse;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
   }
   .carousel .carousel-item .left{
     margin-top: 0;
@@ -920,5 +920,8 @@
   }
   .carousel{
     margin-bottom: 35px;
+  }
+  .carousel .carousel-item p.auth{
+    margin-bottom: 0;
   }
 }
