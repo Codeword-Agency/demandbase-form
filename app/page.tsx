@@ -264,6 +264,7 @@ export default function ContactForm() {
               </div>
             </div>
           </form>
+          <div className="footerText">All submissions will remain anonymous. We’ll take it to our grave. </div>
       </div>
         <div className="stacked">
           <div className="outliner">
