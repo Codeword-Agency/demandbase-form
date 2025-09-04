@@ -892,4 +892,7 @@
   .carousel .carousel-item{
     flex-direction: column-reverse;
   }
+  .carousel .carousel-item .left{
+    margin-top: 0;
+  }
 }
