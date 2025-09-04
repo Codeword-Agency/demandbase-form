@@ -124,8 +124,10 @@ export default function ContactForm() {
       </video>
       <div className="enter-wrap">
         <img src="/LOGO-NEW.svg" />
+        <div className="wrap-sec">
         <p>The light flickers. The mic hums.</p>
         <p>You’re on the air.</p>
+        </div>
         <Button
           type="enter"
           className={`enter`}
