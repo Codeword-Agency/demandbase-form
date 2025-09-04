@@ -232,7 +232,7 @@
   margin-bottom: -90px;
 }
 
-.handjet{
+.handjet, .footerText, .main-logo p{
   font-family: "Aldrich", sans-serif;
 }
 .outliner{
