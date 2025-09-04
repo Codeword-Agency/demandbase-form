@@ -452,7 +452,9 @@
   flex-wrap: wrap;
   width: 100%;
 }
-
+.socials{
+  margin-top: 30px;
+}
 .socials .socials-wrap{
   display: flex;
   justify-content: center;
