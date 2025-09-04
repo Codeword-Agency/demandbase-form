@@ -901,4 +901,7 @@
     aspect-ratio: 1;
     width: 100%;
   }
+  .enter-wrap p{
+    display: inline-block;
+  }
 }
