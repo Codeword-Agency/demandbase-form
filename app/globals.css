@@ -483,6 +483,9 @@
     margin-top: 30px;
     color: #fff;
 }
+.footerText.legal{
+  font-size: 12px;
+}
 
 /* exciting things are happening */
  canvas {
