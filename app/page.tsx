@@ -318,7 +318,7 @@ export default function ContactForm() {
                   </Carousel>
           </div>
         </div>
-
+        <div className="footerText">This contest is run by Demandbase, Inc. By entering, you promise your story is your own and you let us share it in our marketing. We’re not responsible for late/missing entries or other hiccups, and by joining in you agree we’re not liable for any issues connected to the contest or prize. Void where prohibited. Governed by the laws of California.</div>
         <div className="socials">
           <div className="socials-wrap">
 
